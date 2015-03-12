@@ -1,5 +1,7 @@
 require 'csv'
 
+require 'pry'
+binding.pry
 class Parser
 
   def self.parse(file_name)
@@ -7,6 +9,7 @@ class Parser
       data
     end
   end
+
 end
 
 
