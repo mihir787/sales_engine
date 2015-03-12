@@ -67,6 +67,4 @@ class CustomerRepository
     @customers.find_all{|customer| customer.updated_at == date}
   end
 
-
-
 end

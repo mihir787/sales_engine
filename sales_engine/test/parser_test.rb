@@ -1,7 +1,7 @@
-require_relative 'test_helper'
-require_relative "../lib/parser"
+require_relative './test_helper'
+require_relative '../lib/file_loader'
 
-class ParserTest < Minitest::Test
+class FileLoaderTest < Minitest::Test
 
   def setup
     @customer_data = Parser.parse('./fixtures/customers_fixture.csv')
