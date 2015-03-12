@@ -1,9 +1,17 @@
 require_relative 'invoice'
+require_relative 'file_loader'
 
 class InvoiceRepository
 
-  def initialize(invoices)
-    @invoices = invoices
+  def initialize(sales_engine)
+    @invoices = []
+    @sales_engine = sales_engine
+  end
+
+  def parse_data(path)
+    file = FileLoader.parse(path)
+    @invoices = file.map{|data| Invoice.new(data, self)}
+    file.close
   end
 
   def all

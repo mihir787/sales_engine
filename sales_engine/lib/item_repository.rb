@@ -1,9 +1,17 @@
 require_relative 'item'
+require_relative 'file_loader'
 
 class ItemRepository
 
-  def initialize(items)
-    @items = items
+  def initialize(sales_engine)
+    @items = []
+    @sales_engine = sales_engine
+  end
+
+  def parse_data(path)
+    file = FileLoader.parse(path)
+    @items = file.map{|data| Item.new(data, self)}
+    file.close
   end
 
   def inspect

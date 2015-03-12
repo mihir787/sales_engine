@@ -1,9 +1,18 @@
 require_relative 'customer'
+require_relative 'file_loader'
 
 class CustomerRepository
+  attr_reader :customers, :sales_engine
 
-  def initialize(customers)
-    @customers = customers
+  def initialize(sales_engine)
+    @customers = []
+    @sales_engine = sales_engine
+  end
+
+  def parse_data(path)
+    file = FileLoader.parse(path)
+    @customers = file.map{|data| Customer.new(data, self)}
+    file.close
   end
 
   def inspect
@@ -57,7 +66,5 @@ class CustomerRepository
   def find_all_by_updated_at(date)
     @customers.find_all{|customer| customer.updated_at == date}
   end
-
-
 
 end

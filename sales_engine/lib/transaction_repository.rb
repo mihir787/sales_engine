@@ -1,9 +1,17 @@
 require_relative 'transaction'
+require_relative 'file_loader'
 
 class TransactionRepository
 
-  def initialize(transactions)
-    @transactions = transactions
+  def initialize(sales_engine)
+    @transactions = []
+    @sales_engine = sales_engine
+  end
+
+  def parse_data(path)
+    file = FileLoader.parse(path)
+    @transactions = file.map{|data| Transaction.new(data, self)}
+    file.close
   end
 
   def inspect
