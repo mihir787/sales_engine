@@ -27,46 +27,29 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_customer_with_matching_last_name
-    skip
-    customer_repo = CustomerRepository.new(customers)
-    assert_equal customer2, customer_repo.find_by_last_name("williams")
+    result = sales_engine.customer_repository.find_by_last_name("Ondricka")
+    assert_equal "Ondricka", result.last_name
   end
-#
-#   def test_returns_customer_with_matching_created_at_date
-#     customer1 = Customer.new(:created_at => "01/02/15")
-#     customer2 = Customer.new(:created_at => "10/05/15")
-#     customers = [customer1, customer2]
-#     customer_repo = CustomerRepository.new(customers)
-#     assert_equal customer2, customer_repo.find_by_created_at("10/05/15")
-#   end
-#
-#   def test_returns_customer_with_matching_updated_at_date
-#     customer1 = Customer.new(:updated_at => "01/02/15")
-#     customer2 = Customer.new(:updated_at => "10/05/15")
-#     customers = [customer1, customer2]
-#     customer_repo = CustomerRepository.new(customers)
-#     assert_equal customer2, customer_repo.find_by_updated_at("10/05/15")
-#   end
-#
-#   def test_returns_all_customers_with_matching_first_name
-#     customer1 = Customer.new(:first_name => "bobby")
-#     customer2 = Customer.new(:first_name => "mike")
-#     customer3 = Customer.new(:first_name => "bobby")
-#     customer4 = Customer.new(:first_name => "john")
-#     customers = [customer1, customer2, customer3, customer4]
-#     customer_repo = CustomerRepository.new(customers)
-#     assert_equal [customer1, customer3], customer_repo.find_all_by_first_name("bobby")
-#   end
-#
-#   def test_returns_all_customers_with_matching_last_name
-#     customer1 = Customer.new(:last_name => "brown")
-#     customer2 = Customer.new(:last_name => "singh")
-#     customer3 = Customer.new(:last_name => "lee")
-#     customer4 = Customer.new(:last_name => "lee")
-#     customers = [customer1, customer2, customer3, customer4]
-#     customer_repo = CustomerRepository.new(customers)
-#     assert_equal [customer3, customer4], customer_repo.find_all_by_last_name("lee")
-#   end
+
+  def test_returns_customer_with_matching_created_at_date
+    result = sales_engine.customer_repository.find_by_created_at("2012-03-27 14:54:09 UTC")
+    assert_equal "2012-03-27 14:54:09 UTC", result.created_at
+  end
+
+  def test_returns_customer_with_matching_updated_at_date
+    result = sales_engine.customer_repository.find_by_updated_at("2012-03-27 14:54:09 UTC")
+    assert_equal "2012-03-27 14:54:09 UTC", result.updated_at
+  end
+
+  def test_returns_all_customers_with_matching_first_name
+    result = sales_engine.customer_repository.find_all_by_first_name("Joey")
+    assert_equal "Joey", result.first.first_name
+  end
+
+  def test_returns_all_customers_with_matching_last_name
+    result = sales_engine.customer_repository.find_all_by_last_name("Ondricka")
+    assert_equal "Ondricka", result.first.last_name
+  end
 #
 #   def test_returns_all_customers_with_matching_id_name
 #     customer1 = Customer.new(:id => "12345")
