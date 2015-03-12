@@ -1,10 +1,18 @@
 require_relative 'merchant'
+require_relative 'file_loader'
 
 class MerchantRepository
   attr_reader :merchant
 
-  def initialize(merchants)
-    @merchants = merchants
+  def initialize(sales_engine)
+    @merchants = []
+    @sales_engine = sales_engine
+  end
+
+  def parse_data(path)
+    file = FileLoader.parse(path)
+    @merchants = file.map{|data| Merchant.new(data, self)}
+    file.close
   end
 
   def inspect

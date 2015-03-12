@@ -10,36 +10,44 @@ require_relative 'item_repository'
 require_relative 'invoice'
 require_relative 'invoice_repository'
 require_relative 'transaction'
-require_relative 'parser'
+require_relative 'transaction_repository'
+require_relative 'file_loader'
 
 
 class SalesEngine
 
-  attr_reader :filepath
+  attr_reader :filepath,
+              :customer_repository,
+              :merchant_repository,
+              :invoice_item_repository,
+              :invoice_repository,
+              :item_repository,
+              :transaction_repository
 
   def initialize(filepath)
     @filepath = filepath
   end
 
   def startup
-    file_path = "#{@filepath}/merchants.csv"
-    @merchants = Parser.parse(file_path)
-    # customers_data = Parser.parse("customers.csv")
-    # merchants_data = Parser.parse("merchants.csv")
-    # invoice_items_data = Parser.parse("invoice_items.csv")
-    # invoices_data = Parser.parse("invoices.csv")
-    # items_data = Parser.parse("items.csv")
-    # transactions_data = Parser.parse("transactions.csv")
-    #
-    # @customer_respository = CustomerRepository.new(customers_data, self)
-    # @merchant_respository = MerchantRepository.new(merchants_data, self)
-    # @invoice_item_repository = InvoiceItemRepository.new(invoice_items_data, self)
-    # @invoice_repository = InvoiceRepository.new(invoices_data, self)
-    # @item_repository = ItemsRepository.new(invoices_data, self)
-    # @transaction_repository = TransactionRepository.new(transactions_data, self)
+    @customer_repository = CustomerRepository.new(self)
+    @merchant_repository = MerchantRepository.new(self)
+    @invoice_item_repository = InvoiceItemRepository.new(self)
+    @invoice_repository = InvoiceRepository.new(self)
+    @item_repository = ItemRepository.new(self)
+    @transaction_repository = TransactionRepository.new(self)
+
+    @customer_repository.parse_data("#{@filepath}/customers.csv")
+    @merchant_repository.parse_data("#{@filepath}/merchants.csv")
+    @invoice_item_repository.parse_data("#{@filepath}/invoice_items.csv")
+    @invoice_repository.parse_data("#{@filepath}/invoices.csv")
+    @item_repository.parse_data("#{@filepath}/items.csv")
+    @transaction_repository.parse_data("#{@filepath}/transactions.csv")
   end
 end
 
+# se = SalesEngine.new("./data")
+# se.startup
+# puts se.customer_repository.customers.inspect
 
 #this is from the spec
 # engine.startup

@@ -1,11 +1,9 @@
 require 'csv'
 
-class Parser
+class FileLoader
 
   def self.parse(file_name)
-    parsed_data = CSV.open(file_name, headers: true, header_converters: :symbol).map do |data|
-      data
-    end
+    parsed_data = CSV.open(file_name, headers: true, header_converters: :symbol)
   end
 end
 
