@@ -2,12 +2,16 @@ require_relative 'test_helper'
 require_relative '../lib/customer'
 
 class CustomerTest < MiniTest::Test
-
+  attr_reader :data, :customer
   def setup
-    data = { id: "7", first_name: "Parker", last_name: "Daugherty",
-      created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-27 14:54:10 UTC" }
+    @data = {  id: "7",
+              first_name: "Parker",
+              last_name: "Daugherty",
+              created_at: "2012-03-27 14:54:10 UTC",
+              updated_at: "2012-03-27 14:54:10 UTC"
+              }
 
-    @customer = Customer.new(data)
+    @customer = Customer.new(data, nil)
   end
 
   def test_id
