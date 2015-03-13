@@ -90,7 +90,4 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 5, result.count
   end
 
-
-
-
 end
