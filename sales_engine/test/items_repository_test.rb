@@ -35,58 +35,61 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", result.description
   end
 
-  # def test_returns_item_with_matching_unit_price
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_by_unit_price("30")
-  # end
-  #
-  # def test_returns_item_with_matching_merchant_id
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_by_merchant_id("1234")
-  # end
-  #
-  # def test_returns_item_with_matching_created_at_date
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_by_created_at("02/02/02")
-  # end
-  #
-  # def test_returns_item_with_matching_updated_at_date
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_by_updated_at("10/05/15")
-  # end
-  #
-  # def test_returns_all_items_with_matching_id
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_id("1234")
-  # end
-  #
-  # def test_returns_all_items_with_matching_name
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_name("mike")
-  # end
-  #
-  # def test_returns_all_items_with_matching_description
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_description("big")
-  # end
-  #
-  # def test_returns_all_items_with_matching_unit_price
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_unit_price("100")
-  # end
-  #
-  # def test_returns_all_items_with_merchant_id
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_merchant_id("1234")
-  # end
-  #
-  # def test_returns_all_items_with_matching_created_at
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_created_at("05/05/95")
-  # end
-  #
-  # def test_returns_all_items_with_matching_updated_at
-  #   result =
-      # assert_equal "", sales_engine.item_repository.find_all_by_updated_at("05/10/95")
-  # end
+  def test_returns_item_with_matching_unit_price
+    result = sales_engine.item_repository.find_by_unit_price("50000")
+    assert_equal "50000", result.unit_price
+  end
+
+  def test_returns_item_with_matching_merchant_id
+    result = sales_engine.item_repository.find_by_merchant_id("100")
+    assert_equal "100", result.merchant_id
+  end
+
+  def test_returns_item_with_matching_created_at_date
+    result = sales_engine.item_repository.find_by_created_at("2012-03-27 14:54:09 UTC")
+    assert_equal "2012-03-27 14:54:09 UTC", result.created_at
+  end
+
+  def test_returns_item_with_matching_updated_at_date
+    result = sales_engine.item_repository.find_by_updated_at("2012-03-27 14:54:09 UTC")
+    assert_equal "2012-03-27 14:54:09 UTC", result.updated_at
+  end
+
+  def test_returns_all_items_with_matching_id
+    result = sales_engine.item_repository.find_all_by_id("2481")
+    assert_equal 1, result.count
+  end
+
+  def test_returns_all_items_with_matching_name
+    result = sales_engine.item_repository.find_all_by_name("Item Fuga Est")
+    assert_equal 1, result.count
+  end
+
+  def test_returns_all_items_with_matching_description
+    result = sales_engine.item_repository.find_all_by_description("Natus soluta qui consequatur repellat beatae aspernatur. Qui fuga sed velit. Vitae rerum suscipit quidem sed unde.")
+    assert_equal 1, result.count
+  end
+
+  def test_returns_all_items_with_matching_unit_price
+    result = sales_engine.item_repository.find_all_by_unit_price("70767")
+    assert_equal 1, result.count
+  end
+
+  def test_returns_all_items_with_merchant_id
+    result = sales_engine.item_repository.find_all_by_merchant_id("100")
+    assert_equal 6, result.count
+    assert_equal "2481", result[3].id
+  end
+
+  def test_returns_all_items_with_matching_created_at
+    result = sales_engine.item_repository.find_all_by_created_at("2012-03-27 14:54:09 UTC")
+    assert_equal 6, result.count
+    assert_equal "2481", result[3].id
+  end
+
+  def test_returns_all_items_with_matching_updated_at
+    result = sales_engine.item_repository.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
+    assert_equal 6, result.count
+    assert_equal "2481", result[3].id
+  end
 end
