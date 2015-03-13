@@ -10,8 +10,6 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_customers
-    # customer_repository = CustomerRepository.new(nil)
-    # customer_repository.parse_data("./fixtures/customers_fixture.csv")
     assert_equal 7, sales_engine.customer_repository.all.count
   end
 
