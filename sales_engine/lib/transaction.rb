@@ -10,7 +10,7 @@ class Transaction
     @result                       =   data[:result]
     @created_at                   =   data[:created_at]
     @updated_at                   =   data[:updated_at]
-    @repo = repo
+    @repo                         =   repo
   end
 
 end
