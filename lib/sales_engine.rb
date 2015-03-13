@@ -49,7 +49,7 @@ class SalesEngine
   end
 
   def merchant_find_item_by_id(id)
-    @item_repository.find_by_item(id)
+    @item_repository.find_by_merchant_id(id)
   end
 
   def merchant_find_invoice_by_id(id)

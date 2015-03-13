@@ -10,13 +10,21 @@ class MerchantRepositoryTest < Minitest::Test
     @sales_engine.startup
   end
 
-  # def test_it_can_call_up_to_sales_engine_with_id_to_find_invoice
-  #   parent = Minitest::Mock.new
-  #   merchant_repo = MerchantRepository.new(data,parent)
-  #   parent.expect(:merchant_find_item_by_id, "pretzel", ["9"])
-  #   assert_equal "pretzel", merchant.invoice
-  #   parent.verify
-  # end
+  def test_it_can_call_up_to_sales_engine_with_id_to_find_item
+    parent = Minitest::Mock.new
+    merchant_repo = MerchantRepository.new(parent)
+    parent.expect(:merchant_find_item_by_id, "pretzel", ["9"])
+    assert_equal "pretzel", merchant_repo.find_item_by_id("9")
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_sales_engine_with_id_to_find_invoice
+    parent = Minitest::Mock.new
+    merchant_repo = MerchantRepository.new(parent)
+    parent.expect(:merchant_find_invoice_by_id, "pretzel", ["9"])
+    assert_equal "pretzel", merchant_repo.find_invoice_by_id("9")
+    parent.verify
+  end
 
   def test_returns_all_merchant
     assert_equal 7, sales_engine.merchant_repository.all.count
