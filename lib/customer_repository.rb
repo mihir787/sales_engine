@@ -67,4 +67,8 @@ class CustomerRepository
     @customers.find_all{|customer| customer.updated_at == date}
   end
 
+  def find_invoices(id)
+    @sales_engine.find_invoices_by_customer_id(id)
+  end
+
 end

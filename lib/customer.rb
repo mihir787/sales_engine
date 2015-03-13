@@ -9,4 +9,8 @@ class Customer
     @updated_at   =   data[:updated_at]
     @repo         =   repo
   end
+
+  def invoices
+    @parent.find_invoices(id)
+  end
 end

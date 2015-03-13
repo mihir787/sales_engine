@@ -47,11 +47,15 @@ class SalesEngine
   def find_customer_by_invoice_customer_id(id)
     @customer_repository.find_by_customer(id)
   end
+
+  def find_invoices_by_customer_id(id)
+    @invoice_repository.find_all_by_customer_id(id)
+  end
 end
 
-sales_engine = SalesEngine.new("./data")
-sales_engine.startup
-puts sales_engine.find_customer_by_invoice_customer_id
+# sales_engine = SalesEngine.new("./data")
+# sales_engine.startup
+# puts sales_engine.find_customer_by_invoice_customer_id
 
 # se = SalesEngine.new("./data")
 # se.startup
