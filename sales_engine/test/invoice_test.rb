@@ -2,6 +2,26 @@ require_relative './test_helper'
 require_relative '../lib/invoice'
 
 class InvoiceTest < Minitest::Test
+  attr_reader :data
+
+  def setup
+    @data = {
+              id:     "1",
+              customer_id: "1",
+              merchant_id: "25",
+              status: "shipped",
+              created_at: "10/10/10",
+              updated_at: "12/12/12"
+              }
+  end
+
+  def test_it_can_call_up_to_repository_with_customer
+    parent = Minitest::Mock.new
+    invoice = Invoice.new(data,parent)
+    parent.expect(:find_by_customer, [1,2], ["1"])
+    assert_equal [1,2], invoice.customer
+    parent.verify
+  end
 
   # def setup
   #   data = { :id "1", :customer_id: "1", merchant_id: "26", status: "shipped",

@@ -15,6 +15,10 @@ class InvoiceRepository
     file.close
   end
 
+  def find_by_customer(id)
+    @sale_engine.find_customer_by_invoice_customer_id(id)
+  end
+
   def all
     @invoices
   end
