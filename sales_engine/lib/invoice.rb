@@ -14,14 +14,8 @@ class Invoice
     @repo         =   repo
   end
 
-end
+  def customer
+    @repo.find_by_customer(@customer_id)
+  end
 
-# class Invoice
-#
-#   def initialize(customer_repo, attributes = {})
-#     @customer_id = attributes['customer_id']
-#     @customer_repo = customer_repo
-#   end
-#
-#   def customer
-#     @customer_repo.find_by_id(@customer_id)
+end
