@@ -2,6 +2,7 @@ require_relative 'invoice'
 require_relative 'file_loader'
 
 class InvoiceRepository
+  attr_reader :invoices, :sales_engine
 
   def initialize(sales_engine)
     @invoices = []
@@ -26,6 +27,10 @@ class InvoiceRepository
     @invoices.sample
   end
 
+  def find_by_id(id)
+    @invoices.find{|invoice| invoice.id == id}
+  end
+
   def find_by_customer_id(id)
     @invoices.find{|invoice| invoice.customer_id == id}
   end
@@ -44,6 +49,10 @@ class InvoiceRepository
 
   def find_by_updated_at(date)
     @invoices.find{|invoice| invoice.updated_at == date}
+  end
+
+  def find_all_by_id(id)
+    @invoices.find_all{|invoice| invoice.id == id}
   end
 
   def find_all_by_customer_id(id)
