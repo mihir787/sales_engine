@@ -3,7 +3,6 @@ require_relative '../lib/invoice'
 
 class InvoiceTest < Minitest::Test
   attr_reader :data
-
   def setup
     @data = {
               id:     "1",

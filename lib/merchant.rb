@@ -1,20 +1,20 @@
 class Merchant
   attr_reader :id, :name, :created_at, :updated_at
 
-  def initialize(data, repo)
+  def initialize(data, parent)
     @id         =   data[:id]
     @name       =   data[:name]
     @created_at =   data[:created_at]
     @updated_at =   data[:updated_at]
-    @repo = repo
+    @parent = parent
   end
 
   def item
-    @repo.find_item_by_id(@id)
+    @parent.find_item_by_id(@id)
   end
 
   def invoice
-    @repo.find_invoice_by_id(@id)
+    @parent.find_invoice_by_id(@id)
   end
 
 end

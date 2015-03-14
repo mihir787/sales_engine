@@ -14,6 +14,22 @@ class InvoiceItemTest < MiniTest::Test
              }
   end
 
+  def test_it_can_call_up_to_repository_with_invoice_id
+    parent = Minitest::Mock.new
+    invoice_item = InvoiceItem.new(data,parent)
+    parent.expect(:find_invoice_by_invoice_id, ["pop"], ["1"])
+    assert_equal ["pop"], invoice_item.invoice
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_repository_with_item_id
+    parent = Minitest::Mock.new
+    invoice_item = InvoiceItem.new(data,parent)
+    parent.expect(:find_item_by_item_id, ["boom"], ["539"])
+    assert_equal ["boom"], invoice_item.item
+    parent.verify
+  end
+
   def test_id
     invoice_item = InvoiceItem.new(data, nil)
     assert_equal "1", invoice_item.id
