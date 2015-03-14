@@ -75,6 +75,27 @@ class SalesEngine
   def invoice_item_find_item_by_item_id(id)
     @invoice_repository.find_by_id(id)
   end
+
+  def find_invoices_by_customer_id(id)
+    @invoice_repository.find_all_by_customer_id(id)
+  end
+
+  def find_invoice_items_by_item_id(id)
+    @invoice_item_repository.find_all_by_item_id(id)
+  end
+
+  def find_merchant_by_merchant_id(id)
+    @merchant_repository.find_by_id(id)
+  end
+
+  def find_invoice_by_invoice_id(id)
+    @invoice_repository.find_by_id(id)
+  end
+
+  def merchant_find_item_by_id(id)
+    @item_repository.find_by_merchant_id(id)
+>>>>>>> master
+  end
 end
 
 # sales_engine = SalesEngine.new("./data")
