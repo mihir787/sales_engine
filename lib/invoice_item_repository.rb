@@ -14,6 +14,14 @@ class InvoiceItemRepository
     file.close
   end
 
+  def find_invoice_by_invoice_id(id)
+    @sales_engine.invoice_item_find_invoice_by_invoice_id(id)
+  end
+
+  def find_item_by_item_id(id)
+    @sales_engine.invoice_item_find_item_by_item_id(id)
+  end
+
   def all
     @invoice_items
   end

@@ -16,7 +16,7 @@ class MerchantTest < Minitest::Test
     parent = Minitest::Mock.new
     merchant = Merchant.new(data,parent)
     parent.expect(:find_item_by_id, "taco", ["9"])
-    assert_equal "taco", merchant.item
+    assert_equal "taco", merchant.items
     parent.verify
   end
 
@@ -24,7 +24,7 @@ class MerchantTest < Minitest::Test
     parent = Minitest::Mock.new
     merchant = Merchant.new(data,parent)
     parent.expect(:find_invoice_by_id, "pretzel", ["9"])
-    assert_equal "pretzel", merchant.invoice
+    assert_equal "pretzel", merchant.invoices
     parent.verify
   end
 

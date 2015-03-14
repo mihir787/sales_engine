@@ -9,6 +9,22 @@ class InvoiceItemRepositoryTest < Minitest::Test
     @sales_engine.startup
   end
 
+  def test_it_can_call_up_to_sales_engine_with_invoice_id_to_find_invoice
+    parent = Minitest::Mock.new
+    invoice_item_repo = InvoiceItemRepository.new(parent)
+    parent.expect(:invoice_item_find_invoice_by_invoice_id, "bagel", ["1"])
+    assert_equal "bagel", invoice_item_repo.find_invoice_by_invoice_id("1")
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_sales_engine_with_id_to_find_invoice
+    parent = Minitest::Mock.new
+    invoice_item_repo = InvoiceItemRepository.new(parent)
+    parent.expect(:invoice_item_find_item_by_item_id, "pretzel", ["539"])
+    assert_equal "pretzel", invoice_item_repo.find_item_by_item_id("539")
+    parent.verify
+  end
+
   def test_returns_all_item_invoices
     result = sales_engine.invoice_item_repository.all
     assert_equal 6, result.count

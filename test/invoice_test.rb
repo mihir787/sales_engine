@@ -3,7 +3,6 @@ require_relative '../lib/invoice'
 
 class InvoiceTest < Minitest::Test
   attr_reader :data
-
   def setup
     @data = {
               id:     "1",
@@ -22,6 +21,46 @@ class InvoiceTest < Minitest::Test
     assert_equal [1,2], invoice.customer
     parent.verify
   end
+
+  def test_it_can_call_up_to_repository_with_customer
+    parent = Minitest::Mock.new
+    invoice = Invoice.new(data,parent)
+    parent.expect(:find_transactions_by_id, [3,5], ["1"])
+    assert_equal [3,5], invoice.transactions
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_repository_to_find_invoice_items_by_id
+    parent = Minitest::Mock.new
+    invoice = Invoice.new(data,parent)
+    parent.expect(:find_invoice_items_by_id, ["pasta"], ["1"])
+    assert_equal ["pasta"], invoice.invoice_items
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
+    parent = Minitest::Mock.new
+    invoice = Invoice.new(data,parent)
+    parent.expect(:find_merchant_by_id, ["sauce"], ["1"])
+    assert_equal ["sauce"], invoice.merchant
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
+    parent = Minitest::Mock.new
+    invoice = Invoice.new(data,parent)
+    parent.expect(:find_merchant_by_id, ["sauce"], ["1"])
+    assert_equal ["sauce"], invoice.merchant
+    parent.verify
+  end
+
+  # def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
+  #   parent = Minitest::Mock.new
+  #   invoice = Invoice.new(data,parent)
+  #   parent.expect(:find_items_by_id, ["pan"], ["1"])
+  #   assert_equal ["pan"], invoice.items
+  #   parent.verify
+  # end
 
   def test_id
     invoice = Invoice.new(data, nil)
