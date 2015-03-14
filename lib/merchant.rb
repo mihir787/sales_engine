@@ -9,4 +9,12 @@ class Merchant
     @repo = repo
   end
 
+  def item
+    @repo.find_item_by_id(@id)
+  end
+
+  def invoice
+    @repo.find_invoice_by_id(@id)
+  end
+
 end
