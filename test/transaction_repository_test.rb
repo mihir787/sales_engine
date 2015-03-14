@@ -93,7 +93,7 @@ class TransactionRepositoryTest < Minitest::Test
   def test_it_can_call_up_to_parent_to_find_invoice
     parent = Minitest::Mock.new
     transaction_repository = TransactionRepository.new(parent)
-    parent.expect(:find_invoice_by_invoice_id, "rex", [1])
+    parent.expect(:transaction_find_invoice_by_invoice_id, "rex", [1])
     assert_equal "rex", transaction_repository.find_invoice(1)
   end
 

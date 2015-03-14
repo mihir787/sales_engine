@@ -103,7 +103,7 @@ class ItemRepositoryTest < Minitest::Test
   def test_it_can_call_up_to_parent_to_find_merchant
     parent = Minitest::Mock.new
     item_repository = ItemRepository.new(parent)
-    parent.expect(:find_merchant_by_merchant_id, "crystal", ["420"])
+    parent.expect(:item_find_merchant_by_merchant_id, "crystal", ["420"])
     assert_equal "crystal", item_repository.find_merchant("420")
   end
 end
