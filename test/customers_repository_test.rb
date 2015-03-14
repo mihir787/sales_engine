@@ -68,4 +68,11 @@ class CustomerRepositoryTest < Minitest::Test
     result = sales_engine.customer_repository.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
     assert_equal "2012-03-27 14:54:09 UTC", result.first.updated_at
   end
+
+  def test_it_can_call_up_to_parent_to_find_invoice
+    parent = Minitest::Mock.new
+    customer_repository = CustomerRepository.new(parent)
+    parent.expect(:find_invoices_by_customer_id, "rex", [1])
+    assert_equal "rex", customer_repository.find_invoices(1)
+  end
 end

@@ -8,6 +8,9 @@ class ItemTest < MiniTest::Test
   def setup
     @sales_engine = SalesEngine.new("./fixtures")
     @sales_engine.startup
+
+    @data = { id: "1", name: "Parker", description: "Fat", unit_price: "7690", merchant_id: "456",
+      created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-27 14:54:10 UTC" }
   end
 
 
@@ -45,4 +48,22 @@ class ItemTest < MiniTest::Test
     result = sales_engine.item_repository.find_by_id("2481")
     assert_equal "2012-03-27 14:54:09 UTC", result.updated_at
   end
+
+  def test_it_can_call_up_to_repository_with_item_id
+    parent = Minitest::Mock.new
+    item = Item.new(@data, parent)
+    parent.expect(:find_invoice_items, ["pizza", "burgers"], ["1"])
+    assert_equal ["pizza", "burgers"], item.invoice_items
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_repository_with_merchant_id
+    parent = Minitest::Mock.new
+    item = Item.new(@data, parent)
+    parent.expect(:find_merchant, ["michael"], ["456"])
+    assert_equal ["michael"], item.merchant
+    parent.verify
+  end
+
+
 end

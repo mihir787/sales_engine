@@ -92,4 +92,18 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 6, result.count
     assert_equal "2481", result[3].id
   end
+
+  def test_it_can_call_up_to_parent_to_find_invoice_items
+    parent = Minitest::Mock.new
+    item_repository = ItemRepository.new(parent)
+    parent.expect(:find_invoice_items_by_item_id, "rex", ["121"])
+    assert_equal "rex", item_repository.find_invoice_items("121")
+  end
+
+  def test_it_can_call_up_to_parent_to_find_merchant
+    parent = Minitest::Mock.new
+    item_repository = ItemRepository.new(parent)
+    parent.expect(:find_merchant_by_merchant_id, "crystal", ["420"])
+    assert_equal "crystal", item_repository.find_merchant("420")
+  end
 end
