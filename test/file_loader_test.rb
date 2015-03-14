@@ -4,12 +4,12 @@ require_relative '../lib/file_loader'
 class FileLoaderTest < Minitest::Test
 
   def setup
-    @customer_data = Parser.parse('./fixtures/customers_fixture.csv')
-    @merchant_data = Parser.parse('./fixtures/merchants_fixture.csv')
-    @transaction_data = Parser.parse('./fixtures/transactions_fixture.csv')
-    @item_data = Parser.parse('./fixtures/items_fixture.csv')
-    @invoice_data = Parser.parse('./fixtures/invoices_fixture.csv')
-    @invoice_item_data = Parser.parse('./fixtures/invoice_items_fixture.csv')
+    @customer_data = FileLoader.parse('./fixtures/customers.csv')
+    @merchant_data = FileLoader.parse('./fixtures/merchants.csv')
+    @transaction_data = FileLoader.parse('./fixtures/transactions.csv')
+    @item_data = FileLoader.parse('./fixtures/items.csv')
+    @invoice_data = FileLoader.parse('./fixtures/invoices.csv')
+    @invoice_item_data = FileLoader.parse('./fixtures/invoice_items.csv')
   end
 
   def test_it_exists
@@ -25,7 +25,7 @@ class FileLoaderTest < Minitest::Test
     assert_equal 7, @customer_data.size
   end
 
-  def test_customer_file_can_be_laoded_in_and_parsed
+  def test_customer_file_can_be_loaded_in_and_parsed
     assert_equal "1", @customer_data[0][:id]
     assert_equal "2012-03-27 14:58:15 UTC", @customer_data[-1][:updated_at]
   end

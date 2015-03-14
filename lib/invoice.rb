@@ -23,4 +23,22 @@ class Invoice
     @parent.find_by_customer(@customer_id)
   end
 
+  def transactions
+    @parent.find_transactions_by_id(@id)
+  end
+
+  def invoice_items
+    @parent.find_invoice_items_by_id(@id)
+  end
+
+  def merchant
+    @parent.find_merchant_by_id(@id)
+  end
+
+  def items
+    invoice_items.map do |invoice_item|
+      invoice_item.item
+    end
+  end
+
 end

@@ -9,6 +9,38 @@ class InvoiceRepositoryTest < Minitest::Test
     @sales_engine.startup
   end
 
+  def test_it_can_call_up_to_sales_engine_with_invoice_id_to_find_invoice
+    parent = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new(parent)
+    parent.expect(:invoice_find_customer_by_invoice_customer_id, "fries", ["1"])
+    assert_equal "fries", invoice_repo.find_by_customer("1")
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_sales_engine_with_invoice_id_to_find_all_transactions
+    parent = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new(parent)
+    parent.expect(:invoice_find_all_transactions_by_id, "chips", ["1"])
+    assert_equal "chips", invoice_repo.find_transactions_by_id("1")
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_sales_engine_with_invoice_id_to_find_all_transactions
+    parent = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new(parent)
+    parent.expect(:invoice_find_all_invoice_items_by_id, "fish", ["1"])
+    assert_equal "fish", invoice_repo.find_invoice_items_by_id("1")
+    parent.verify
+  end
+
+  def test_it_can_call_up_to_sales_engine_with_invoice_id_to_find_all_transactions
+    parent = Minitest::Mock.new
+    invoice_repo = InvoiceRepository.new(parent)
+    parent.expect(:invoice_find_merchant_by_id, "soda", ["1"])
+    assert_equal "soda", invoice_repo.find_merchant_by_id("1")
+    parent.verify
+  end
+
   def test_returns_all_invoices
     assert_equal 7, sales_engine.invoice_repository.all.count
   end
