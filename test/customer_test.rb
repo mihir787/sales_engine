@@ -34,8 +34,8 @@ class CustomerTest < MiniTest::Test
   def test_it_can_call_up_to_repository_with_customer_id
     parent = Minitest::Mock.new
     customer = Customer.new(data, parent)
-    parent.expect(:find_invoices, [1,2], ["1"])
-    assert_equal ["pizza"], customer.invoices
+    parent.expect(:find_invoices, ["pizza", "burgers"], ["7"])
+    assert_equal ["pizza", "burgers"], customer.invoices
     parent.verify
   end
 
