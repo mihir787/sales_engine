@@ -44,14 +44,22 @@ class SalesEngine
     @transaction_repository.parse_data("#{@filepath}/transactions.csv")
   end
 
-  def find_customer_by_invoice_customer_id(id)
+  def invoice_find_customer_by_invoice_customer_id(id)
     @customer_repository.find_by_customer(id)
+  end
+
+  def merchant_find_item_by_id(id)
+    @item_repository.find_by_merchant_id(id)
+  end
+
+  def merchant_find_invoice_by_id(id)
+    @invoice_repository.find_by_merchant_id(id)
   end
 end
 
-sales_engine = SalesEngine.new("./data")
-sales_engine.startup
-puts sales_engine.find_customer_by_invoice_customer_id
+# sales_engine = SalesEngine.new("./data")
+# sales_engine.startup
+# puts sales_engine.find_customer_by_invoice_customer_id
 
 # se = SalesEngine.new("./data")
 # se.startup
