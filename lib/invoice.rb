@@ -1,6 +1,3 @@
-# require_relative 'customer'
-# require_relative 'customer_repository'
-
 class Invoice
   attr_reader :id,
               :customer_id,

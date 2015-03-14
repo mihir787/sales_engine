@@ -27,7 +27,7 @@ class InvoiceItemRepository
   end
 
   def inspect
-    "#<#{self.class} #{customers.size} rows>"
+    "#<#{self.class} #{@invoice_items.size} rows>"
   end
 
   def random

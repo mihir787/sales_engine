@@ -15,7 +15,7 @@ class ItemRepository
   end
 
   def inspect
-    "#<#{self.class} #{customers.size} rows>"
+    "#<#{self.class} #{@items.size} rows>"
   end
 
   def all
@@ -83,7 +83,7 @@ class ItemRepository
   end
 
   def find_invoice_items(id)
-    @sales_engine.find_invoice_items_by_item_id(id)
+    @sales_engine.item_find_invoice_items_by_item_id(id)
   end
 
   def find_merchant(id)

@@ -96,7 +96,7 @@ class ItemRepositoryTest < Minitest::Test
   def test_it_can_call_up_to_parent_to_find_invoice_items
     parent = Minitest::Mock.new
     item_repository = ItemRepository.new(parent)
-    parent.expect(:find_invoice_items_by_item_id, "rex", ["121"])
+    parent.expect(:item_find_invoice_items_by_item_id, "rex", ["121"])
     assert_equal "rex", item_repository.find_invoice_items("121")
   end
 
