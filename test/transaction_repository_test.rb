@@ -90,4 +90,11 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 5, result.count
   end
 
+  def test_it_can_call_up_to_parent_to_find_invoice
+    parent = Minitest::Mock.new
+    transaction_repository = TransactionRepository.new(parent)
+    parent.expect(:find_invoice_by_invoice_id, "rex", [1])
+    assert_equal "rex", transaction_repository.find_invoice(1)
+  end
+
 end
