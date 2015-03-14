@@ -44,7 +44,7 @@ class SalesEngine
     @transaction_repository.parse_data("#{@filepath}/transactions.csv")
   end
 
-  def invoice_find_customer_by_invoice_customer_id(id)
+  def invoice_find_customer_by_customer_id(id)
     @customer_repository.find_by_id(id)
   end
 
@@ -61,11 +61,11 @@ class SalesEngine
   end
 
   def merchant_find_item_by_id(id)
-    @item_repository.find_by_merchant_id(id)
+    @item_repository.find_all_by_merchant_id(id)
   end
 
   def merchant_find_invoice_by_id(id)
-    @invoice_repository.find_by_merchant_id(id)
+    @invoice_repository.find_all_by_merchant_id(id)
   end
 
   def invoice_item_find_invoice_by_invoice_id(id)

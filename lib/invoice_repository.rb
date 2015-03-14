@@ -16,7 +16,7 @@ class InvoiceRepository
   end
 
   def find_by_customer(id)
-    @sales_engine.invoice_find_customer_by_invoice_customer_id(id)
+    @sales_engine.invoice_find_customer_by_customer_id(id)
   end
 
   def find_transactions_by_id(id)

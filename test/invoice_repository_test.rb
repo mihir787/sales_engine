@@ -12,7 +12,7 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_it_can_call_up_to_sales_engine_with_invoice_id_to_find_invoice
     parent = Minitest::Mock.new
     invoice_repo = InvoiceRepository.new(parent)
-    parent.expect(:invoice_find_customer_by_invoice_customer_id, "fries", ["1"])
+    parent.expect(:invoice_find_customer_by_customer_id, "fries", ["1"])
     assert_equal "fries", invoice_repo.find_by_customer("1")
     parent.verify
   end

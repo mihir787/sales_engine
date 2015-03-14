@@ -9,11 +9,11 @@ class Merchant
     @parent = parent
   end
 
-  def item
+  def items
     @parent.find_item_by_id(@id)
   end
 
-  def invoice
+  def invoices
     @parent.find_invoice_by_id(@id)
   end
 

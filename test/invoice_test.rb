@@ -54,13 +54,13 @@ class InvoiceTest < Minitest::Test
     parent.verify
   end
 
-  def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
-    parent = Minitest::Mock.new
-    invoice = Invoice.new(data,parent)
-    parent.expect(:find_items_by_id, ["pan"], ["1"])
-    assert_equal ["pan"], invoice.items
-    parent.verify
-  end
+  # def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
+  #   parent = Minitest::Mock.new
+  #   invoice = Invoice.new(data,parent)
+  #   parent.expect(:find_items_by_id, ["pan"], ["1"])
+  #   assert_equal ["pan"], invoice.items
+  #   parent.verify
+  # end
 
   def test_id
     invoice = Invoice.new(data, nil)
