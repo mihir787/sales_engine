@@ -1,18 +1,11 @@
 require 'csv'
-require_relative 'merchant'
 require_relative 'merchant_repository'
-require_relative 'customer'
 require_relative 'customer_repository'
-require_relative 'invoice_item'
 require_relative 'invoice_item_repository'
-require_relative 'item'
 require_relative 'item_repository'
-require_relative 'invoice'
 require_relative 'invoice_repository'
-require_relative 'transaction'
 require_relative 'transaction_repository'
 require_relative 'file_loader'
-
 
 class SalesEngine
 
@@ -53,7 +46,7 @@ class SalesEngine
   end
 
   def invoice_find_all_invoice_items_by_id(id)
-    @invoice_items_repository.find_all_by_id(id)
+    @invoice_item_repository.find_all_by_id(id)
   end
 
   def invoice_find_merchant_by_id(id)
@@ -80,17 +73,32 @@ class SalesEngine
     @invoice_repository.find_all_by_customer_id(id)
   end
 
-  def find_invoice_items_by_item_id(id)
+  def merchant_find_invoice_by_id(id)
+    @invoice_repository.find_all_by_merchant_id(id)
+  end
+
+  def invoice_item_find_invoice_by_invoice_id(id)
+    @invoice_repository.find_by_id(id)
+  end
+
+  def invoice_item_find_item_by_item_id(id)
+    @invoice_repository.find_by_id(id)
+  end
+
+  def customer_find_invoices_by_customer_id(id)
+    @invoice_repository.find_all_by_customer_id(id)
+  end
+
+  def item_find_invoice_items_by_item_id(id)
     @invoice_item_repository.find_all_by_item_id(id)
   end
 
-  def find_merchant_by_merchant_id(id)
+  def item_find_merchant_by_merchant_id(id)
     @merchant_repository.find_by_id(id)
   end
 
-  def find_invoice_by_invoice_id(id)
+  def transaction_find_invoice_by_invoice_id(id)
     @invoice_repository.find_by_id(id)
-  end
 
   def merchant_find_item_by_id(id)
     @item_repository.find_by_merchant_id(id)

@@ -21,38 +21,13 @@ class FileLoaderTest < Minitest::Test
     assert @invoice_item_data
   end
 
-  def test_file_can_be_loaded_in
-    assert_equal 7, @customer_data.size
-  end
-
-  def test_customer_file_can_be_loaded_in_and_parsed
-    assert_equal "1", @customer_data[0][:id]
-    assert_equal "2012-03-27 14:58:15 UTC", @customer_data[-1][:updated_at]
-  end
-
-  def test_merchant_file_can_be_loaded_in_and_extract_merchant_data
-    assert_equal "2012-03-27 14:53:59 UTC", @merchant_data[0][:created_at]
-    assert_equal "2012-03-27 14:54:09 UTC", @merchant_data[-1][:updated_at]
-  end
-
-  def test_transaction_file_can_be_loaded_in_and_extract_transaction_data
-    assert_equal nil, @transaction_data[0][:credit_card_expiration_date]
-    assert_equal "4843", @transaction_data[-1][:invoice_id]
-  end
-
-  def test__item_file_can_be_loaded_in_and_extract_item_data
-    assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", @item_data[0][:description]
-    assert_equal "2012-03-27 14:54:09 UTC", @item_data[-1][:updated_at]
-  end
-
-  def test_invoice_file_can_be_loaded_in_and_extract_invoice_data
-    assert_equal "26", @invoice_data[0][:merchant_id]
-    assert_equal "shipped", @invoice_data[-1][:status]
-  end
-
-  def test_invoice_item_file_can_be_loaded_in_and_extract_invoice_item_data
-    assert_equal "539", @invoice_item_data[0][:item_id]
-    assert_equal "5", @invoice_item_data[-1][:quantity]
+  def test_it_loads
+    assert_equal "Alexander", @customer_data.to_a[1][:first_name]
+    assert_equal "95", @merchant_data.to_a[1][:id]
+    assert_equal "5592", @transaction_data.to_a[2][:id]
+    assert_equal "2479", @item_data.to_a[2][:id]
+    assert_equal "4838", @invoice_data.to_a[1][:id]
+    assert_equal "21683", @invoice_item_data.to_a[1][:id]
   end
 
 end

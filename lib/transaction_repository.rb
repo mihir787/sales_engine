@@ -15,7 +15,7 @@ class TransactionRepository
   end
 
   def inspect
-    "#<#{self.class} #{customers.size} rows>"
+    "#<#{self.class} #{@transactions.size} rows>"
   end
 
   def all
@@ -83,7 +83,7 @@ class TransactionRepository
   end
 
   def find_invoice(id)
-    @sales_engine.find_invoice_by_invoice_id(id)
+    @sales_engine.transaction_find_invoice_by_invoice_id(id)
   end
 
 
