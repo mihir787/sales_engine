@@ -42,7 +42,7 @@ class SalesEngine
   end
 
   def invoice_find_all_transactions_by_id(id)
-    @transaction_repository.find_all_by_id(id)
+    @transaction_repository.find_all_by_invoice_id(id)
   end
 
   def invoice_find_all_invoice_items_by_id(id)
@@ -105,6 +105,15 @@ class SalesEngine
     @item_repository.find_by_merchant_id(id)
   end
 end
+
+# sales_engine = SalesEngine.new("./data")
+# sales_engine.startup
+# customer = sales_engine.customer_repository.customers[3]
+# customer.transactions.each do |cust|
+#   puts cust.invoice_id
+# end
+#
+# print sales_engine.invoice_find_all_transactions_by_id("13")
 
 # sales_engine = SalesEngine.new("./data")
 # sales_engine.startup

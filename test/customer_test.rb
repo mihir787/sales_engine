@@ -50,9 +50,20 @@ class CustomerTest < MiniTest::Test
     customer = sales_engine.customer_repository.customers[3]
     customer1 = sales_engine.customer_repository.customers[500]
 
-    assert_equal 8, customer.transactions.count
+    assert_equal 7, customer.transactions.count
     assert_equal 1, customer1.transactions.count
   end
+
+  def test_favorite_merchant #review this test!
+    sales_engine = SalesEngine.new("./data")
+    sales_engine.startup
+    customer = sales_engine.customer_repository.customers[3]
+    customer1 = sales_engine.customer_repository.customers[10]
+    assert_equal "Adams-Kovacek", customer.favorite_merchant.name
+    assert_equal "Marvin, Renner and Bauch", customer1.favorite_merchant.name
+
+  end
+
 
 
 end

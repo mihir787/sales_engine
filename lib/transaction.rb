@@ -17,4 +17,7 @@ class Transaction
     @parent.find_invoice(invoice_id)
   end
 
+  def successful_transaction?
+    result == "success"
+  end
 end
