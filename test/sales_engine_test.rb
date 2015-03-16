@@ -30,7 +30,7 @@ class SalesEngineTest < Minitest::Test
 
   def test_merchant_find_item_by_id
     result = sales_engine.merchant_find_item_by_id("1")
-    assert_equal 1, result.count
+    assert_equal "1", result.id
   end
 
   def test_merchant_find_invoice_by_id
@@ -40,7 +40,7 @@ class SalesEngineTest < Minitest::Test
 
   def test_returns_item_for_merchant
     result = sales_engine.merchant_find_item_by_id("1")
-    assert_equal 1, result.count
+    assert_equal "1", result.id
   end
 
   def test_returns_invoice_for_merchant
