@@ -1,5 +1,6 @@
 require_relative './test_helper'
 require_relative '../lib/invoice'
+require_relative '../lib/sales_engine'
 
 class InvoiceTest < Minitest::Test
   attr_reader :data
@@ -15,11 +16,9 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_returns_item_through_invoice_item
-    parent = Minitest::Mock.new
-    invoice = Invoice.new(data,parent)
-    parent.expect(:find_invoice_items_by_id, [1,2], ["1"])
-    assert_equal [1,2], invoice.items
-    parent.verify
+    sales_engine = SalesEngine.new("./fixtures")
+    sales_engine.startup
+    assert_equal 1, sales_engine.invoice_repository.invoices[0].items.size
   end
 
   def test_it_can_call_up_to_repository_with_customer

@@ -20,8 +20,8 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_customer_with_matching_id
-    result = sales_engine.customer_repository.find_by_id("1000")
-    assert_equal "1000", result.id
+    result = sales_engine.customer_repository.find_by_id(1000)
+    assert_equal 1000, result.id
   end
 
   def test_returns_customer_with_matching_first_name
@@ -35,13 +35,13 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_customer_with_matching_created_at_date
-    result = sales_engine.customer_repository.find_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.created_at
+    result = sales_engine.customer_repository.find_by_created_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 27, result.created_at.mday
   end
 
   def test_returns_customer_with_matching_updated_at_date
-    result = sales_engine.customer_repository.find_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.updated_at
+    result = sales_engine.customer_repository.find_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 27, result.updated_at.mday
   end
 
   def test_returns_all_customers_with_matching_first_name
@@ -55,18 +55,18 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_customers_with_matching_id_name
-    result = sales_engine.customer_repository.find_all_by_id("1000")
-    assert_equal "1000", result.first.id
+    result = sales_engine.customer_repository.find_all_by_id(1000)
+    assert_equal 1000, result.first.id
   end
 
   def test_returns_all_customers_with_matching_created_at_date
-    result = sales_engine.customer_repository.find_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.created_at
+    result = sales_engine.customer_repository.find_by_created_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 27, result.created_at.mday
   end
 
   def test_returns_all_customers_with_matching_updated_at_date
-    result = sales_engine.customer_repository.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.first.updated_at
+    result = sales_engine.customer_repository.find_all_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 27, result.first.updated_at.mday
   end
 
   def test_it_can_call_up_to_parent_to_find_invoice

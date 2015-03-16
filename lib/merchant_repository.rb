@@ -27,13 +27,6 @@ class MerchantRepository
     @sales_engine.merchant_find_invoice_by_id(id)
   end
 
-  # def self.build_merchants(data)
-  #   merchant_objects = data.map do |row|
-  #     Merchant.new(row)
-  #   end
-  #   self.new(merchant_objects)
-  # end
-
   def all
     @merchants
   end

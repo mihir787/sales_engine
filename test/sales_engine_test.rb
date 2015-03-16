@@ -59,8 +59,8 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_invoice_item_find_item_by_item_id
-    result = sales_engine.invoice_item_find_item_by_item_id("1")
-    assert_equal "1", result.id
+    result = sales_engine.invoice_item_find_item_by_item_id(1)
+    assert_equal 1, result.id
   end
 
   def test_customer_find_invoices_by_customer_id

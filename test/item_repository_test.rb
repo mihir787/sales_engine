@@ -21,8 +21,8 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_item_with_matching_id
-    result = sales_engine.item_repository.find_by_id("2480")
-    assert_equal "2480", result.id
+    result = sales_engine.item_repository.find_by_id(2480)
+    assert_equal 2480, result.id
   end
 
   def test_returns_item_with_matching_name
@@ -36,27 +36,27 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_item_with_matching_unit_price
-    result = sales_engine.item_repository.find_by_unit_price("50000")
-    assert_equal "50000", result.unit_price
+    result = sales_engine.item_repository.find_by_unit_price(50000)
+    assert_equal 50000, result.unit_price
   end
 
   def test_returns_item_with_matching_merchant_id
-    result = sales_engine.item_repository.find_by_merchant_id("100")
-    assert_equal "100", result.merchant_id
+    result = sales_engine.item_repository.find_by_merchant_id(100)
+    assert_equal 100, result.merchant_id
   end
 
   def test_returns_item_with_matching_created_at_date
-    result = sales_engine.item_repository.find_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.created_at
+    result = sales_engine.item_repository.find_by_created_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 27, result.created_at.mday
   end
 
   def test_returns_item_with_matching_updated_at_date
-    result = sales_engine.item_repository.find_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.updated_at
+    result = sales_engine.item_repository.find_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 27, result.updated_at.mday
   end
 
   def test_returns_all_items_with_matching_id
-    result = sales_engine.item_repository.find_all_by_id("2481")
+    result = sales_engine.item_repository.find_all_by_id(2481)
     assert_equal 1, result.count
   end
 
@@ -71,14 +71,14 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_items_with_matching_unit_price
-    result = sales_engine.item_repository.find_all_by_unit_price("70767")
+    result = sales_engine.item_repository.find_all_by_unit_price(70767)
     assert_equal 1, result.count
   end
 
   def test_returns_all_items_with_merchant_id
-    result = sales_engine.item_repository.find_all_by_merchant_id("100")
+    result = sales_engine.item_repository.find_all_by_merchant_id(100)
     assert_equal 6, result.count
-    assert_equal "2481", result[3].id
+    assert_equal 2481, result[3].id
   end
 
   def test_returns_all_items_with_matching_created_at
