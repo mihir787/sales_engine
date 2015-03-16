@@ -96,10 +96,6 @@ class SalesEngine
   def transaction_find_invoice_by_invoice_id(id)
     @invoice_repository.find_by_id(id)
   end
-
-  def merchant_find_item_by_id(id)
-    @item_repository.find_by_merchant_id(id)
-  end
 end
 
 if __FILE__ == $0
