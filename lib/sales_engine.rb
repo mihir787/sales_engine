@@ -46,7 +46,7 @@ class SalesEngine
   end
 
   def invoice_find_all_invoice_items_by_id(id)
-    @invoice_item_repository.find_all_by_id(id)
+    @invoice_item_repository.find_all_by_invoice_id(id)
   end
 
   def invoice_find_merchant_by_id(id)
@@ -65,10 +65,6 @@ class SalesEngine
     @invoice_repository.find_by_id(id)
   end
 
-  def invoice_item_find_item_by_item_id(id)
-    @invoice_repository.find_by_id(id)
-  end
-
   def find_invoices_by_customer_id(id)
     @invoice_repository.find_all_by_customer_id(id)
   end
@@ -82,7 +78,7 @@ class SalesEngine
   end
 
   def invoice_item_find_item_by_item_id(id)
-    @invoice_repository.find_by_id(id)
+    @item_repository.find_by_id(id)
   end
 
   def customer_find_invoices_by_customer_id(id)
@@ -106,29 +102,13 @@ class SalesEngine
   end
 end
 
-# sales_engine = SalesEngine.new("./data")
-# sales_engine.startup
-# customer = sales_engine.customer_repository.customers[3]
-# customer.transactions.each do |cust|
-#   puts cust.invoice_id
-# end
-#
-# print sales_engine.invoice_find_all_transactions_by_id("13")
+if __FILE__ == $0
 
-# sales_engine = SalesEngine.new("./data")
-# sales_engine.startup
-# puts sales_engine.find_customer_by_invoice_customer_id
+engine = SalesEngine.new("./data")
+engine.startup
 
-# se = SalesEngine.new("./data")
-# se.startup
-# puts se.customer_repository.customers.inspect
+invoice_item = invoice.invoice_items.size
 
-#this is from the spec
-# engine.startup
-#
-# engine.merchant_repository
-# engine.invoice_repository
-# engine.item_repository
-# engine.invoice_item_repository
-# engine.customer_repository
-# engine.transaction_repository
+puts invoice_item
+
+end

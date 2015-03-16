@@ -16,7 +16,7 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_it_returns_item_through_invoice_item
-    sales_engine = SalesEngine.new("./data")
+    sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
     assert_equal 1, sales_engine.invoice_repository.invoices[0].items.size
   end
