@@ -72,7 +72,7 @@ class CustomerRepositoryTest < Minitest::Test
   def test_it_can_call_up_to_parent_to_find_invoice
     parent = Minitest::Mock.new
     customer_repository = CustomerRepository.new(parent)
-    parent.expect(:find_invoices_by_customer_id, "rex", [1])
+    parent.expect(:customer_find_invoices_by_customer_id, "rex", [1])
     assert_equal "rex", customer_repository.find_invoices(1)
   end
 end

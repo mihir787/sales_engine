@@ -7,28 +7,6 @@ class FileLoader
 
 end
 
-
-# print Parser.parse('./data/customers.csv')[0]
-
-
-
-
-# class DataExtractor
-#   attr_reader :file_name, :component
-#
-#   def initialize(file_name, component)
-#     @file_name = file_name
-#     @component = component
-#   end
-#
-#   def self.extract
-#     CSV.open(file_name, headers: true, header_converters: :symbol).map do |data|
-#       component.new(data)
-#     end
-#   end
-#
-# end
-
-# #tyler example
-# parsed_data = DataExtractor.extract
-# merchant_repository = MerchantRepository.new(parsed_data, self)
+# puts @customer_data = FileLoader.parse('./fixtures/customers.csv')
+# puts @customer_data.to_a
+# puts @customer_data.to_a[1]

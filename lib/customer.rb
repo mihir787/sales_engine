@@ -13,4 +13,32 @@ class Customer
   def invoices
     @parent.find_invoices(id)
   end
+
+  def transactions #retest this, im not sure its working.
+    invoices.map do |invoice|
+      invoice.transactions
+    end.flatten
+  end
+
+  def favorite_merchant
+    successful_transaction_merchants.max_by do |merchant|
+      successful_transaction_merchants.count(merchant)
+    end
+  end
+
+
+  private
+
+  def select_successful_transactions
+    transactions.select { |transaction| transaction.successful_transaction? }
+  end
+
+  def successful_transaction_invoices
+    select_successful_transactions.map {|transaction| transaction.invoice}
+  end
+
+  def successful_transaction_merchants
+    successful_transaction_invoices.map { |invoice| invoice.merchant }
+  end
+
 end
