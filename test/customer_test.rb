@@ -17,7 +17,7 @@ class CustomerTest < MiniTest::Test
   end
 
   def test_id
-    assert_equal "7", @customer.id
+    assert_equal 7, @customer.id
   end
 
   def test_first_name
@@ -29,17 +29,17 @@ class CustomerTest < MiniTest::Test
   end
 
   def test_created_at
-    assert_equal "2012-03-27 14:54:10 UTC", @customer.created_at
+    assert @customer.created_at
   end
 
   def test_updated_at
-    assert_equal "2012-03-27 14:54:10 UTC", @customer.updated_at
+    assert @customer.updated_at
   end
 
   def test_it_can_call_up_to_repository_with_customer_id
     parent = Minitest::Mock.new
     customer = Customer.new(data, parent)
-    parent.expect(:find_invoices, ["pizza", "burgers"], ["7"])
+    parent.expect(:find_invoices, ["pizza", "burgers"], [7])
     assert_equal ["pizza", "burgers"], customer.invoices
     parent.verify
   end
