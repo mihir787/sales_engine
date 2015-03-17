@@ -1,5 +1,9 @@
 require_relative 'test_helper'
 require_relative '../lib/merchant'
+require_relative '../lib/sales_engine'
+require 'bigdecimal'
+require 'bigdecimal/util'
+require 'date'
 
 class MerchantTest < Minitest::Test
   attr_accessor :data
@@ -10,6 +14,21 @@ class MerchantTest < Minitest::Test
               created_at: "2012-03-27 14:53:59 UTC",
               updated_at: "2012-03-27 14:53:59 UTC"
               }
+  end
+
+  def test_it_can_return_favorite_customer
+    sales_engine = SalesEngine.new("./data")
+    sales_engine.startup
+    merchant = sales_engine.merchant_repository.merchants[1]
+    assert_equal "Efren", merchant.favorite_customer.first_name
+  end
+
+  def test_it_can_return_total_revenue
+    sales_engine = SalesEngine.new("./data")
+    sales_engine.startup
+    merchant = sales_engine.merchant_repository.merchants[1]
+    assert_equal 436253, merchant.revenue.to_i
+    assert_equal 14079, merchant.revenue(Date.parse("2012-03-27 14:53:59 UTC")).to_i
   end
 
   def test_it_can_call_up_to_repository_with_id_to_find_item

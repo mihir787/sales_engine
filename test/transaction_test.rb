@@ -13,6 +13,13 @@ class TransactionTest < Minitest::Test
     @sales_engine.startup
   end
 
+  def test_it_returns_revenue
+    skip
+    sales_engine = SalesEngine.new("./fixtures")
+    sales_engine.startup
+    assert_equal 1, sales_engine.transaction_repository.transactions[0].revenue
+  end
+
   def test_returns_cusomter_by_id
     result = sales_engine.transaction_repository.find_by_id(5591)
     assert_equal 5591, result.id
