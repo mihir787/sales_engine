@@ -2,7 +2,7 @@ require_relative 'merchant'
 require_relative 'file_loader'
 
 class MerchantRepository
-  attr_reader :merchant
+  attr_reader :merchants, :sales_engine
 
   def initialize(sales_engine)
     @merchants = []

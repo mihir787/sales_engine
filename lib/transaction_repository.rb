@@ -88,10 +88,15 @@ class TransactionRepository
     @sales_engine.transaction_find_invoice_by_invoice_id(id)
   end
 
-  #####ERIC'S CODE######
   def find_all_successful_transactions
     @successful_transactions ||= transactions.select do |transaction|
       transaction.result == "success"
+    end
+  end
+
+  def find_all_failed_transactions
+    @failed_transaction ||= transactions.select do |transaction|
+      transaction.result == "failed"
     end
   end
 
