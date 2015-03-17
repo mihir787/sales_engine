@@ -15,7 +15,7 @@ class MerchantTest < Minitest::Test
   def test_it_can_call_up_to_repository_with_id_to_find_item
     parent = Minitest::Mock.new
     merchant = Merchant.new(data,parent)
-    parent.expect(:find_item_by_id, "taco", ["9"])
+    parent.expect(:find_item_by_id, "taco", [9])
     assert_equal "taco", merchant.items
     parent.verify
   end
@@ -23,14 +23,14 @@ class MerchantTest < Minitest::Test
   def test_it_can_call_up_to_repository_with_id_to_find_invoice
     parent = Minitest::Mock.new
     merchant = Merchant.new(data,parent)
-    parent.expect(:find_invoice_by_id, "pretzel", ["9"])
+    parent.expect(:find_invoice_by_id, "pretzel", [9])
     assert_equal "pretzel", merchant.invoices
     parent.verify
   end
 
   def test_id
     @merchant = Merchant.new(data, nil)
-    assert_equal "9", @merchant.id
+    assert_equal 9, @merchant.id
   end
 
   def test_name
@@ -40,12 +40,12 @@ class MerchantTest < Minitest::Test
 
   def test_created_at
     @merchant = Merchant.new(data, nil)
-    assert_equal "2012-03-27 14:53:59 UTC", @merchant.created_at
+    assert_equal 27, @merchant.created_at.mday
   end
 
   def test_updated_at
     @merchant = Merchant.new(data, nil)
-    assert_equal "2012-03-27 14:53:59 UTC", @merchant.updated_at
+    assert_equal 27, @merchant.updated_at.mday
   end
 
 end

@@ -35,12 +35,12 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_customer_with_matching_created_at_date
-    result = sales_engine.customer_repository.find_by_created_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    result = sales_engine.customer_repository.find_by_created_at(Date.parse("2012-03-27 14:58:15 UTC"))
     assert_equal 27, result.created_at.mday
   end
 
   def test_returns_customer_with_matching_updated_at_date
-    result = sales_engine.customer_repository.find_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    result = sales_engine.customer_repository.find_by_updated_at(Date.parse("2012-03-27 14:58:15 UTC"))
     assert_equal 27, result.updated_at.mday
   end
 
@@ -60,13 +60,13 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_customers_with_matching_created_at_date
-    result = sales_engine.customer_repository.find_by_created_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    result = sales_engine.customer_repository.find_by_created_at(Date.parse("2012-03-27 14:58:15 UTC"))
     assert_equal 27, result.created_at.mday
   end
 
   def test_returns_all_customers_with_matching_updated_at_date
-    result = sales_engine.customer_repository.find_all_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
-    assert_equal 27, result.first.updated_at.mday
+    result = sales_engine.customer_repository.find_all_by_updated_at(Date.parse("2012-03-27 14:58:15 UTC"))
+    assert_equal 7, result.count
   end
 
   def test_it_can_call_up_to_parent_to_find_invoice
