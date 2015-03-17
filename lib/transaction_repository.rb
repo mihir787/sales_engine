@@ -3,6 +3,8 @@ require_relative 'file_loader'
 
 class TransactionRepository
 
+  attr_reader :transactions
+
   def initialize(sales_engine)
     @transactions = []
     @sales_engine = sales_engine
@@ -86,5 +88,11 @@ class TransactionRepository
     @sales_engine.transaction_find_invoice_by_invoice_id(id)
   end
 
+  #####ERIC'S CODE######
+  def find_all_successful_transactions
+    @successful_transactions ||= transactions.select do |transaction|
+      transaction.result == "success"
+    end
+  end
 
 end

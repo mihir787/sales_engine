@@ -1,5 +1,5 @@
 class Customer
-  attr_reader :id, :first_name, :last_name, :created_at, :updated_at
+  attr_reader :id, :first_name, :last_name, :created_at, :updated_at, :parent
 
   def initialize(data, parent)
     @id           =   data[:id].to_i
@@ -11,34 +11,39 @@ class Customer
   end
 
   def invoices
-    @parent.find_invoices(@id)
+    @invoices ||= parent.find_invoices(@id)
   end
 
-  def transactions #retest this, im not sure its working.
+  def transactions
     invoices.map do |invoice|
       invoice.transactions
     end.flatten
   end
 
   def favorite_merchant
-    successful_transaction_merchants.max_by do |merchant|
-      successful_transaction_merchants.count(merchant)
+    get_merchants_for_all_invoices.max_by do |merchant|
+      get_merchants_for_all_invoices.count(merchant)
     end
   end
 
-
-  private
-
-  def select_successful_transactions
-    transactions.select { |transaction| transaction.successful_transaction? }
+  def successful_invoices_for_this_customer
+      @successful_invoices ||= parent.sales_engine.invoice_repository.find_all_successful_invoices
   end
 
-  def successful_transaction_invoices
-    select_successful_transactions.map {|transaction| transaction.invoice}
+  def get_merchants_for_successful_invoices
+    @merchants ||= successful_invoices_for_this_customer.map do |invoice|
+      merchant_relationship.find_by_id(invoice.merchant_id)
+    end
   end
 
-  def successful_transaction_merchants
-    successful_transaction_invoices.map { |invoice| invoice.merchant }
+  def get_merchants_for_all_invoices
+    @merchants ||= invoices.map do |invoice|
+      parent.sales_engine.merchant_repository.find_by_id(invoice.merchant_id)
+    end
+  end
+
+  def merchant_relationship
+    parent.sales_engine.merchant_repository
   end
 
 end
