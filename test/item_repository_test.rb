@@ -1,6 +1,8 @@
 require_relative 'test_helper'
 require_relative '../lib/item_repository'
 require_relative '../lib/sales_engine'
+require 'date'
+
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :sales_engine
@@ -36,8 +38,8 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_item_with_matching_unit_price
-    result = sales_engine.item_repository.find_by_unit_price(50000)
-    assert_equal 50000, result.unit_price
+    result = sales_engine.item_repository.find_by_unit_price(50000.to_d/100)
+    assert_equal 2482, result.id
   end
 
   def test_returns_item_with_matching_merchant_id
@@ -71,7 +73,7 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_items_with_matching_unit_price
-    result = sales_engine.item_repository.find_all_by_unit_price(70767)
+    result = sales_engine.item_repository.find_all_by_unit_price(70767.to_d/100)
     assert_equal 1, result.count
   end
 
@@ -82,15 +84,15 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_items_with_matching_created_at
-    result = sales_engine.item_repository.find_all_by_created_at("2012-03-27 14:54:09 UTC")
-    assert_equal 6, result.count
-    assert_equal "2481", result[3].id
+    result = sales_engine.item_repository.find_all_by_created_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 7, result.count
+    assert_equal 2480, result[3].id
   end
 
   def test_returns_all_items_with_matching_updated_at
-    result = sales_engine.item_repository.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal 6, result.count
-    assert_equal "2481", result[3].id
+    result = sales_engine.item_repository.find_all_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 7, result.count
+    assert_equal 2480, result[3].id
   end
 
   def test_it_can_call_up_to_parent_to_find_invoice_items

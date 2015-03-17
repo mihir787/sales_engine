@@ -24,7 +24,7 @@ class InvoiceTest < Minitest::Test
   def test_it_can_call_up_to_repository_with_customer
     parent = Minitest::Mock.new
     invoice = Invoice.new(data,parent)
-    parent.expect(:find_by_customer, [1,2], ["1"])
+    parent.expect(:find_by_customer, [1,2], [1])
     assert_equal [1,2], invoice.customer
     parent.verify
   end
@@ -32,7 +32,7 @@ class InvoiceTest < Minitest::Test
   def test_it_can_call_up_to_repository_with_customer
     parent = Minitest::Mock.new
     invoice = Invoice.new(data,parent)
-    parent.expect(:find_transactions_by_id, [3,5], ["1"])
+    parent.expect(:find_transactions_by_id, [3,5], [1])
     assert_equal [3,5], invoice.transactions
     parent.verify
   end
@@ -40,7 +40,7 @@ class InvoiceTest < Minitest::Test
   def test_it_can_call_up_to_repository_to_find_invoice_items_by_id
     parent = Minitest::Mock.new
     invoice = Invoice.new(data,parent)
-    parent.expect(:find_invoice_items_by_id, ["pasta"], ["1"])
+    parent.expect(:find_invoice_items_by_id, ["pasta"], [1])
     assert_equal ["pasta"], invoice.invoice_items
     parent.verify
   end
@@ -48,7 +48,7 @@ class InvoiceTest < Minitest::Test
   def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
     parent = Minitest::Mock.new
     invoice = Invoice.new(data,parent)
-    parent.expect(:find_merchant_by_id, ["sauce"], ["1"])
+    parent.expect(:find_merchant_by_id, ["sauce"], [1])
     assert_equal ["sauce"], invoice.merchant
     parent.verify
   end
@@ -56,24 +56,24 @@ class InvoiceTest < Minitest::Test
   def test_it_can_call_up_to_repository_to_find_merchant_items_by_id
     parent = Minitest::Mock.new
     invoice = Invoice.new(data,parent)
-    parent.expect(:find_merchant_by_id, ["sauce"], ["1"])
+    parent.expect(:find_merchant_by_id, ["sauce"], [1])
     assert_equal ["sauce"], invoice.merchant
     parent.verify
   end
 
   def test_id
     invoice = Invoice.new(data, nil)
-    assert_equal "1", invoice.id
+    assert_equal 1, invoice.id
   end
 
   def test_customer_id
     invoice = Invoice.new(data, nil)
-    assert_equal "1", invoice.customer_id
+    assert_equal 1, invoice.customer_id
   end
 
   def test_merchant_id
     invoice = Invoice.new(data, nil)
-    assert_equal "25", invoice.merchant_id
+    assert_equal 25, invoice.merchant_id
   end
 
   def test_status
@@ -83,11 +83,11 @@ class InvoiceTest < Minitest::Test
 
   def test_created_at
     invoice = Invoice.new(data, nil)
-    assert_equal "2012-03-25 09:54:09 UTC", invoice.created_at
+    assert_equal 25, invoice.created_at.mday
   end
 
   def test_updated_at
     invoice = Invoice.new(data, nil)
-    assert_equal "2012-03-25 09:54:09 UTC", invoice.updated_at
+    assert_equal 25, invoice.updated_at.mday
   end
 end

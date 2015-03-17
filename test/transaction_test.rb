@@ -14,44 +14,44 @@ class TransactionTest < Minitest::Test
   end
 
   def test_returns_cusomter_by_id
-    result = sales_engine.transaction_repository.find_by_id("5591")
-    assert_equal "5591", result.id
+    result = sales_engine.transaction_repository.find_by_id(5591)
+    assert_equal 5591, result.id
   end
 
   def test_invoice_id
-    result = sales_engine.transaction_repository.find_by_id("5591")
-    assert_equal "4841", result.invoice_id
+    result = sales_engine.transaction_repository.find_by_id(5591)
+    assert_equal 4841, result.invoice_id
   end
 
   def test_credit_card_number
-    result = sales_engine.transaction_repository.find_by_id("5594")
+    result = sales_engine.transaction_repository.find_by_id(5594)
     assert_equal "4148878905213123", result.credit_card_number
   end
 
   def test_credit_card_expiration
-    result = sales_engine.transaction_repository.find_by_id("5591")
-    assert_equal nil, result.credit_card_expiration_date
+    result = sales_engine.transaction_repository.find_by_id(5591)
+    assert_equal 0, result.credit_card_expiration_date
   end
 
   def test_result
-    result = sales_engine.transaction_repository.find_by_id("5591")
+    result = sales_engine.transaction_repository.find_by_id(5591)
     assert_equal "failed", result.result
   end
 
   def test_created_at
-    result = sales_engine.transaction_repository.find_by_id("5591")
-    assert_equal "2012-03-27 14:58:15 UTC", result.created_at
+    result = sales_engine.transaction_repository.find_by_id(5591)
+    assert_equal 27, result.created_at.mday
   end
 
   def test_updated_at
-    result = sales_engine.transaction_repository.find_by_id("5591")
-    assert_equal "2012-03-27 14:58:15 UTC", result.updated_at
+    result = sales_engine.transaction_repository.find_by_id(5591)
+    assert_equal 27, result.updated_at.mday
   end
 
   def test_it_can_call_up_to_repository_with_customer_id
     parent = Minitest::Mock.new
     transaction = Transaction.new(@data, parent)
-    parent.expect(:find_invoice, ["pizza", "burgers"], ["422"])
+    parent.expect(:find_invoice, ["pizza", "burgers"], [422])
     assert_equal ["pizza", "burgers"], transaction.invoice
     parent.verify
   end

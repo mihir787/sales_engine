@@ -13,16 +13,16 @@ class MerchantRepositoryTest < Minitest::Test
   def test_it_can_call_up_to_sales_engine_with_id_to_find_item
     parent = Minitest::Mock.new
     merchant_repo = MerchantRepository.new(parent)
-    parent.expect(:merchant_find_item_by_id, "pretzel", ["9"])
-    assert_equal "pretzel", merchant_repo.find_item_by_id("9")
+    parent.expect(:merchant_find_item_by_id, "pretzel", [9])
+    assert_equal "pretzel", merchant_repo.find_item_by_id(9)
     parent.verify
   end
 
   def test_it_can_call_up_to_sales_engine_with_id_to_find_invoice
     parent = Minitest::Mock.new
     merchant_repo = MerchantRepository.new(parent)
-    parent.expect(:merchant_find_invoice_by_id, "pretzel", ["9"])
-    assert_equal "pretzel", merchant_repo.find_invoice_by_id("9")
+    parent.expect(:merchant_find_invoice_by_id, "pretzel", [9])
+    assert_equal "pretzel", merchant_repo.find_invoice_by_id(9)
     parent.verify
   end
 
@@ -42,15 +42,13 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_returns_merchant_with_matching_created_at_date
-    result = sales_engine.merchant_repository.find_by_created_at("2012-03-27 14:54:08 UTC")
-    assert_equal "2012-03-27 14:54:08 UTC", result.created_at
-    assert_equal "95", result.id
+    result = sales_engine.merchant_repository.find_by_created_at(Date.parse("2012-03-27 14:54:08 UTC"))
+    assert_equal 1, result.id
   end
 
   def test_returns_merchant_with_matching_updated_at_date
-    result = sales_engine.merchant_repository.find_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal "2012-03-27 14:54:09 UTC", result.updated_at
-    assert_equal "97", result.id
+    result = sales_engine.merchant_repository.find_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 1, result.id
   end
 
   def test_returns_all_merchants_with_matching_name
@@ -59,23 +57,23 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_merchants_with_matching_id_name
-    result = sales_engine.merchant_repository.find_all_by_id("99")
+    result = sales_engine.merchant_repository.find_all_by_id(99)
     assert_equal 1, result.count
   end
 
   def test_returns_all_merchants_with_matching_created_at_date
-    result = sales_engine.merchant_repository.find_all_by_created_at("2012-03-27 14:54:08 UTC")
-    assert_equal 2, result.count
+    result = sales_engine.merchant_repository.find_all_by_created_at(Date.parse("2012-03-27 14:54:08 UTC"))
+    assert_equal 7, result.count
   end
 
   def test_returns_all_merchants_with_matching_updated_at_date
-    result = sales_engine.merchant_repository.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
-    assert_equal 4, result.count
+    result = sales_engine.merchant_repository.find_all_by_updated_at(Date.parse("2012-03-27 14:54:09 UTC"))
+    assert_equal 7, result.count
   end
 
   def test_returns_merchant_id
-    result = sales_engine.merchant_repository.find_by_id("100")
-    assert_equal "100", result.id
+    result = sales_engine.merchant_repository.find_by_id(100)
+    assert_equal "Wisozk, Hoeger and Bosco", result.name
   end
 
 end

@@ -20,13 +20,13 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_returns_transaction_item_with_matching_id
-    result = sales_engine.transaction_repository.find_by_id("5591")
-    assert_equal "5591", result.id
+    result = sales_engine.transaction_repository.find_by_id(5591)
+    assert_equal 5591, result.id
   end
 
   def test_returns_transaction_item_with_matching_invoice_id
-    result = sales_engine.transaction_repository.find_by_invoice_id("4842")
-    assert_equal  "4842" , result.invoice_id
+    result = sales_engine.transaction_repository.find_by_invoice_id(4842)
+    assert_equal  4842 , result.invoice_id
   end
 
   def test_returns_transaction_item_with_matching_credit_card_number
@@ -35,32 +35,32 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_returns_transaction_item_with_matching_credit_card_expiration_date
-    result = sales_engine.transaction_repository.find_by_credit_card_expiration_date(nil)
-    assert_equal nil, result.credit_card_expiration_date
+    result = sales_engine.transaction_repository.find_by_credit_card_expiration_date("")
+    assert_equal nil, result
   end
 
   def test_returns_transaction_item_with_matching_result
     result = sales_engine.transaction_repository.find_by_result("failed")
-    assert_equal  "5591" , result.id
+    assert_equal  5591 , result.id
   end
 
   def test_returns_transaction_with_matching_created_at_date
-    result = sales_engine.transaction_repository.find_by_created_at("2012-03-27 14:58:15 UTC")
-    assert_equal "5591", result.id
+    result = sales_engine.transaction_repository.find_by_created_at(Date.parse("2012-03-27 14:58:15 UTC"))
+    assert_equal "4654405418249632", result.credit_card_number
   end
 
   def test_returns_transaction_with_matching_updated_at_date
-    result = sales_engine.transaction_repository.find_by_updated_at("2012-03-27 14:58:15 UTC")
-    assert_equal "5591", result.id
+    result = sales_engine.transaction_repository.find_by_updated_at(Date.parse("2012-03-27 14:58:15 UTC"))
+    assert_equal 1, result.id
   end
 
   def test_returns_all_invoice_item_with_matching_id
-    result = sales_engine.transaction_repository.find_all_by_id("5593")
+    result = sales_engine.transaction_repository.find_all_by_id(5593)
     assert_equal 1, result.count
   end
 
   def test_returns_all_invoice_item_with_matching_invoice_id
-    result = sales_engine.transaction_repository.find_all_by_invoice_id("4842")
+    result = sales_engine.transaction_repository.find_all_by_invoice_id(4842)
     assert_equal 2, result.count
   end
 
@@ -76,18 +76,18 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_invoice_item_with_matching_credit_card_expiration_date
-    result = sales_engine.transaction_repository.find_all_by_credit_card_expiration_date(nil)
-    assert_equal 6, result.count
+    result = sales_engine.transaction_repository.find_all_by_credit_card_expiration_date("")
+    assert_equal 0, result.count
   end
 
   def test_returns_all_invoice_item_with_matching_created_at
-    result = sales_engine.transaction_repository.find_all_by_created_at("2012-03-27 14:58:15 UTC")
-    assert_equal 5, result.count
+    result = sales_engine.transaction_repository.find_all_by_created_at(Date.parse("2012-03-27 14:58:15 UTC"))
+    assert_equal 6, result.count
   end
 
   def test_returns_all_invoice_item_with_matching_updated_at
-    result = sales_engine.transaction_repository.find_all_by_updated_at("2012-03-27 14:58:15 UTC")
-    assert_equal 5, result.count
+    result = sales_engine.transaction_repository.find_all_by_updated_at(Date.parse("2012-03-27 14:58:15 UTC"))
+    assert_equal 6, result.count
   end
 
   def test_it_can_call_up_to_parent_to_find_invoice

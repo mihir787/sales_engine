@@ -53,7 +53,7 @@ class SalesEngine
     @merchant_repository.find_by_id(id)
   end
 
-  def merchant_find_item_by_id(id)
+  def merchant_find_item_by_id(id) 
     @item_repository.find_all_by_merchant_id(id)
   end
 
