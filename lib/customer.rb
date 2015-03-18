@@ -20,7 +20,6 @@ class Customer
     end.flatten
   end
 
-
   def favorite_merchant
     get_merchants_for_all_invoices.max_by do |merchant|
       get_merchants_for_all_invoices.count(merchant)

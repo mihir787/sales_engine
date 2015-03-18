@@ -29,4 +29,12 @@ class InvoiceItem
     @parent.find_item_by_item_id(@item_id)
   end
 
+  def revenue
+    @revenue ||= quantity * unit_price
+  end
+
+  def successful?
+    invoice.successful?
+  end
+
 end

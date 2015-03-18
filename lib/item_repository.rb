@@ -2,6 +2,7 @@ require_relative 'item'
 require_relative 'file_loader'
 
 class ItemRepository
+  attr_reader :items
 
   def initialize(sales_engine)
     @items = []
@@ -88,6 +89,14 @@ class ItemRepository
 
   def find_merchant(id)
     @sales_engine.item_find_merchant_by_merchant_id(id)
+  end
+
+  def most_revenue(quantity)
+    @items.sort_by{ |item| -item.revenue}.first(quantity)
+  end
+
+  def most_items(quantity)
+    @items.sort_by{ |item| -item.quantity_sold}.first(quantity)
   end
 
 end
