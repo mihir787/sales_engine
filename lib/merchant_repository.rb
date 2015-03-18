@@ -77,4 +77,24 @@ class MerchantRepository
       end
     end
   end
+
+  def most_revenue(x)
+    all.sort_by {|merchant| merchant.revenue }[-x..-1].reverse
+  end
+
+  def most_items(x)
+    all.sort_by {|merchant| merchant.quantity_items_sold}[-x..-1].reverse
+  end
+
+  def revenue(date)
+    all.reduce(0) do |total, merchant|
+      if merchant.revenue(date) != nil
+        total + merchant.revenue(date)
+      else
+        total
+      end
+    end
+  end
+
+
 end
