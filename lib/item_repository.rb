@@ -91,12 +91,23 @@ class ItemRepository
     @sales_engine.item_find_merchant_by_merchant_id(id)
   end
 
+  def find_successful_invoice_items(id)
+    find_invoice_items(id).select do |invoice_item|
+      @sales_engine.successful_transactions_from_invoice_id(invoice_item.invoice_id)
+    end
+  end
+
+  def find_items_sold(id)
+    find_successful_invoice_items(id).inject(0) do |sum, invoice_item|
+      sum + invoice_item.quantity
+    end
+  end
+
   def most_revenue(quantity)
     @items.sort_by{ |item| -item.revenue}.first(quantity)
   end
 
   def most_items(quantity)
-    @items.sort_by{ |item| -item.quantity_sold}.first(quantity)
+    @items.sort_by{ |item| -item.number_sold }.first(quantity)
   end
-
 end
