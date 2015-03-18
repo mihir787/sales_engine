@@ -91,16 +91,6 @@ class InvoiceRepository
     @invoices.find_all{|invoice| invoice.updated_at == date}
   end
 
-  #####ERIC'S CODE######
-  def find_all_successful_invoices
-    successful_transactions = sales_engine.transaction_repository.find_all_successful_transactions
-    @successful_invoices ||= invoices.select do |invoice|
-      successful_transactions.any? do |transaction|
-        transaction.invoice_id == invoice.id
-      end
-    end
-  end
-
   def find_all_failed_invoices
     failed_transactions = sales_engine.transaction_repository.transactions
     successful_transactions = sales.engine.transaction_repository.find_all_successful_transactions
@@ -110,13 +100,4 @@ class InvoiceRepository
       end
     end
   end
-  # def find_all_failed_invoices
-  #   failed_transactions = sales_engine.transaction_repository.find_all_failed_transactions
-  #   @failed_invoices ||= invoices.select do |invoice|
-  #     failed_transactions.any? do |transaction|
-  #       transaction.invoice_id == invoice.id
-  #     end
-  #   end
-  # end
-
 end
