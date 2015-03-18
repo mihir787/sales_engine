@@ -108,4 +108,34 @@ class ItemRepositoryTest < Minitest::Test
     parent.expect(:item_find_merchant_by_merchant_id, "crystal", ["420"])
     assert_equal "crystal", item_repository.find_merchant("420")
   end
+
+  def test_it_finds_the_most_revenue_items_when_there_is_only_one_item
+    #create an item repo
+    #create an item
+    #call item_repo.most_revenue
+    #make sure I get back the one item
+
+    repo = ItemRepository.new
+    item = Item.new
+    repo_item << item
+    result = repo.most_revenue(1)
+    assert_equal item, result.first
+  end
+
+  def test_it_finds_the_most_revenue_items_when_there_is_only_two_item
+    repo = ItemRepository.new
+    item1 = Item.new
+    item2 = Item.new
+    repo_item << item1
+    repo_item << item2
+    #other pieces?
+    #stub item_1 rev as 2
+    #stub item_2 rev as 3
+    item1.stub(:revenue, 2)
+    item2.stub(:revenue, 3)
+
+    result = repo.most_revenue(1)
+    assert_equal item, result.first
+  end
+
 end

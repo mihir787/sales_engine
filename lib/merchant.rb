@@ -46,7 +46,8 @@ class Merchant
   private
 
   def successful_invoices(date = nil)
-    @successful_invoices ||= @parent.find_all_successful_invoices_by_merchant_id(id)
+    @successful_invoices ||=
+    @parent.find_all_successful_invoices_by_merchant_id(id)
 
     if date
       @successful_invoices.select { |invoice| invoice.created_at == date }

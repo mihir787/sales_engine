@@ -69,11 +69,12 @@ class MerchantRepository
   end
 
   def find_all_successful_invoices_by_merchant_id(merchant_id)
-    successful_transactions = @sales_engine.transaction_repository.find_all_successful_transactions
-
+    successful_transactions = @sales_engine.transaction_repository
+                                           .find_all_successful_transactions
     find_invoice_by_id(merchant_id).select do |invoice|
       successful_transactions.any? do |transaction|
-        transaction.invoice_id == invoice.id && invoice.merchant_id == merchant_id
+        transaction.invoice_id == invoice.id &&
+        invoice.merchant_id == merchant_id
       end
     end
   end

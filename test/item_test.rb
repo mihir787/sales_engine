@@ -15,6 +15,12 @@ class ItemTest < MiniTest::Test
       created_at: "2012-03-27 14:54:10 UTC", updated_at: "2012-03-27 14:54:10 UTC" }
   end
 
+  def test_it_returns_best_day
+    @sales_engine = SalesEngine.new("./data")
+    @sales_engine.startup
+    item = sales_engine.item_repository.items[6]
+    assert_equal "2012-03-22", item.best_day.to_s
+  end
 
   def test_id
     result = sales_engine.item_repository.find_by_id(2481)
