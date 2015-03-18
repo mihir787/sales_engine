@@ -96,20 +96,17 @@ class InvoiceRepository
   end
 
   def create(input)
-    #create the invoice
     data = {
             :id => next_id,
-            :customer_id => inputs[:customer].id,
-            :merchant_id => inputs[:merchant].id,
-            :status => inputs[:status],
+            :customer_id => input[:customer].id,
+            :merchant_id => input[:merchant].id,
+            :status => input[:status],
             :created_at => Time.now,
             :updated_at => Time.now
             }
+
     invoice = Invoice.new(data, self)
-    @invoices << invoices
-
-    invoices.add_items(inputs[:items])
-
-    #then add the items
+    @invoices << invoice
+    invoice.add_items(inputs[:items])
   end
 end
