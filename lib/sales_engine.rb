@@ -96,6 +96,16 @@ class SalesEngine
   def transaction_find_invoice_by_invoice_id(id)
     @invoice_repository.find_by_id(id)
   end
+
+  def successful_transactions_from_invoice_id(id)
+    if invoice_find_all_transactions_by_id(id).nil?
+      false
+    else
+      invoice_find_all_transactions_by_id(id).any? do |trans|
+        trans.result == "success"
+      end
+    end
+  end
 end
 
 if __FILE__ == $0
@@ -103,8 +113,6 @@ if __FILE__ == $0
 engine = SalesEngine.new("./data")
 engine.startup
 
-invoice_item = invoice.invoice_items.size
-
-puts invoice_item
+puts engine.item_repository.most_items(37).inspect
 
 end

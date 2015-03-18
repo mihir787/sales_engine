@@ -25,19 +25,9 @@ class Item
   def invoice_items
     @parent.find_invoice_items(id)
   end
-
-  def items_invoices
-    @item_invoices ||= invoice_items.map do |ii|
-      ii.nil? ? [] : ii.invoice
-    end.uniq
-  end
-
+  
   def successful_invoice_items
     invoice_items.select{|invoice_item| invoice_item.successful?}
-  end
-
-  def successful_invoices_for_not_nil
-    items_invoices.select{|invoice_item| invoice_item.successful?}
   end
 
   def merchant
@@ -53,17 +43,14 @@ class Item
     successful_invoice_items.reduce(0){|total,invoice_item| total + invoice_item.revenue}
   end
 
-  def quantity_by_id
-    inv_items = successful_invoices_for_not_nil.map do |invoice|
-       invoice.invoice_items
-     end.flatten
-     inv_items.select { |inv_item| inv_item.item_id == id }
+  def number_sold
+    @parent.find_items_sold(id)
   end
 
-  def quantity_sold
-    quantity_by_id.map do |invoice_item|
-      invoice_item.quantity
-    end.reduce(:+)
+  def quantity_by_id
+    successful_invoice_items.reduce(0) do |total, invoice_item|
+      total + invoice_item.quantity
+    end
   end
 
 end
