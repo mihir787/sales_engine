@@ -38,11 +38,12 @@ class Merchant
     @parent.find_invoice_by_id(@id)
   end
 
-  private
-
-  def successful_invoice_items(date = nil)
-    successful_invoices(date).map(&:invoice_items).flatten
+  def quantity_items_sold
+    successful_invoice_items.reduce(0) {|sum, invoice_item| sum + invoice_item.quantity}
   end
+
+
+  private
 
   def successful_invoices(date = nil)
     @successful_invoices ||=
@@ -53,6 +54,9 @@ class Merchant
     else
       @successful_invoices
     end
+  end
 
+  def successful_invoice_items(date = nil)
+      successful_invoices(date).map(&:invoice_items).flatten
   end
 end
