@@ -19,23 +19,11 @@ class Customer
       invoice.transactions
     end.flatten
   end
-  
+
 
   def favorite_merchant
     get_merchants_for_all_invoices.max_by do |merchant|
       get_merchants_for_all_invoices.count(merchant)
-    end
-  end
-
-  def successful_invoices_for_this_customer
-      @successful_invoices ||= parent.sales_engine
-                                     .invoice_repository
-                                     .find_all_successful_invoices
-  end
-
-  def get_merchants_for_successful_invoices
-    @merchants ||= successful_invoices_for_this_customer.map do |invoice|
-      merchant_relationship.find_by_id(invoice.merchant_id)
     end
   end
 
