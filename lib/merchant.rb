@@ -14,15 +14,9 @@ class Merchant
     @parent     =   parent
   end
 
-  def find_all_successful_invoices
-    @successful_invoices ||= parent.sales_engine
-                                   .invoice_repository
-                                   .find_all_successful_invoices
-  end
-
   def customers_with_pending_invoices
-    pending_invoices = invoices.reject{|invoice| find_all_successful_invoices}
-    pending_customer = pending_invoices.map{|invoice| invoice.customer}
+    failed_invoices = invoices - successful_invoices
+    failed_invoices.map(&:customer)
   end
 
   def favorite_customer

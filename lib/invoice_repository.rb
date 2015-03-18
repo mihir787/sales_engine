@@ -100,13 +100,4 @@ class InvoiceRepository
       end
     end
   end
-  # def find_all_failed_invoices
-  #   failed_transactions = sales_engine.transaction_repository.find_all_failed_transactions
-  #   @failed_invoices ||= invoices.select do |invoice|
-  #     failed_transactions.any? do |transaction|
-  #       transaction.invoice_id == invoice.id
-  #     end
-  #   end
-  # end
-
 end

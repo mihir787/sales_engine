@@ -68,7 +68,6 @@ class MerchantRepository
     @merchants.find_all{|merchant| merchant.updated_at == date}
   end
 
-
   def find_all_successful_invoices_by_merchant_id(merchant_id)
     successful_transactions = @sales_engine.transaction_repository.find_all_successful_transactions
 
