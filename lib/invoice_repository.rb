@@ -91,25 +91,35 @@ class InvoiceRepository
     @invoices.find_all{|invoice| invoice.updated_at == date}
   end
 
-  # def next_id
-  #   @invoices.last_id +1
-  # end
-  #
-  # def create(input)
-  #   #create the invoice
-  #   data = {
-  #           :id => next_id,
-  #           :customer_id => inputs[:customer].id,
-  #           :merchant_id => inputs[:merchant].id,
-  #           :status => inputs[:status],
-  #           :created_at => Time.now,
-  #           :updated_at => Time.now
-  #           }
-  #   invoice = Invoice.new(data, self)
-  #   @invoices << invoices
-  #
-  #   invoices.add_items(inputs[:items])
+  def next_id
+    @invoices.last.id + 1
+  end
 
-    #then add the items
+  def add_invoice_item(item, quantity)
+    @sales_engine.make_inovice_item
+  end
+
+  def pass_to_invoice_repo(input, id)
+    sales_engine.create_transaction(input, id)
+  end
+
+
+  def create(input)
+    data = {
+            :id => next_id,
+            :customer_id => input[:customer].id,
+            :merchant_id => input[:merchant].id,
+            :status => input[:status],
+            :created_at => "#{Time.now}",
+            :updated_at => "#{Time.now}"
+    }
+
+    invoice = Invoice.new(data, self)
+    @invoices << invoice
+
+    invoice.add_items(input[:items]).each do |item|
+      sales_engine.invoice_item_repository.create_invoice_item(data[:id], item[0], item[1])
+    end
+    invoice
   end
 end

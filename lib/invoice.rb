@@ -42,17 +42,17 @@ class Invoice
     transactions.select{ |transaction| transaction.successful_transaction? }
   end
 
-  # def add_items(items)
-    #NOTE  there woulcd be repeats
+  def add_items(items)
+    items_collection = []
+    items.group_by { |item| item }.each do |item, item_collection|
+      items_collection << [item, item_collection.count]
+    end
+    items_collection
+  end
 
+  def charge(input)
+    @parent.pass_to_invoice_repo(input, id)
 
-    #call group_b on items to gourp them by item id
-    #iterate through that result, and for each pair...
-      # create an invoice item
-      # set the item_id to the key
-      # set the quantity to the number of items in the value
-      # set the invoice_id to my id
-      # add the invoice_item to invoice_item repo
-  # end
+  end
 
 end
