@@ -112,19 +112,3 @@ class SalesEngine
   end
 
 end
-
-<<<<<<< HEAD
-# if __FILE__ == $0
-#
-# end
-=======
-
-if __FILE__ == $0
-
-engine = SalesEngine.new("./data")
-engine.startup
-
-puts engine.item_repository.most_items(37).inspect
-
-end
->>>>>>> close_to_finishing
