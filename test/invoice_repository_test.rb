@@ -63,7 +63,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_returns_invoice_with_matching_merchant_id
     result =  sales_engine.invoice_repository.find_by_merchant_id(26)
-    assert_equal 1, result.id
+    assert_equal 4838, result.id
   end
 
   def test_returns_invoice_with_matching_status
@@ -78,7 +78,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_returns_invoice_with_matching_updated_at_date
     result = sales_engine.invoice_repository.find_by_updated_at(Date.parse("2012-03-23 02:58:15 UTC"))
-    assert_equal 4843, result.id
+    assert_equal 2, result.id
   end
 
   def test_returns_all_invoices_with_matching_id
@@ -93,7 +93,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_returns_all_invoices_with_matching_merchant_id
     result =  sales_engine.invoice_repository.find_all_by_merchant_id(26)
-    assert_equal 2, result.count
+    assert_equal 1, result.count
   end
 
   def test_returns_all_invoice_with_matching_status

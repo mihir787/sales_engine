@@ -41,7 +41,9 @@ class TransactionRepository
   end
 
   def find_by_credit_card_expiration_date(number)
-    @transactions.find{|transaction| transaction.credit_card_expiration_date == number}
+    @transactions.find do |transaction|
+      transaction.credit_card_expiration_date == number
+    end
   end
 
   def find_by_result(result)
@@ -69,11 +71,15 @@ class TransactionRepository
   end
 
   def find_all_by_credit_card_number(number)
-    @transactions.find_all{|transaction| transaction.credit_card_number == number}
+    @transactions.find_all do |transaction|
+      transaction.credit_card_number == number
+    end
   end
 
   def find_all_by_credit_card_expiration_date(number)
-    @transactions.find_all{|transaction| transaction.credit_card_expiration_date == number}
+    @transactions.find_all do |transaction|
+      transaction.credit_card_expiration_date == number
+    end
   end
 
   def find_all_by_created_at(date)

@@ -20,8 +20,8 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_returns_transaction_item_with_matching_id
-    result = sales_engine.transaction_repository.find_by_id(5591)
-    assert_equal 5591, result.id
+    result = sales_engine.transaction_repository.find_by_id(2)
+    assert_equal 2, result.id
   end
 
   def test_returns_transaction_item_with_matching_invoice_id
@@ -30,8 +30,8 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_returns_transaction_item_with_matching_credit_card_number
-    result = sales_engine.transaction_repository.find_by_credit_card_number("4397199533314394")
-    assert_equal  "4397199533314394", result.credit_card_number
+    result = sales_engine.transaction_repository.find_by_credit_card_number("12345678")
+    assert_equal  "12345678", result.credit_card_number
   end
 
   def test_returns_transaction_item_with_matching_credit_card_expiration_date
@@ -41,12 +41,12 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_returns_transaction_item_with_matching_result
     result = sales_engine.transaction_repository.find_by_result("failed")
-    assert_equal  5591 , result.id
+    assert_equal  1 , result.id
   end
 
   def test_returns_transaction_with_matching_created_at_date
     result = sales_engine.transaction_repository.find_by_created_at(Date.parse("2012-03-27 14:58:15 UTC"))
-    assert_equal "4654405418249632", result.credit_card_number
+    assert_equal 1, result.id
   end
 
   def test_returns_transaction_with_matching_updated_at_date
@@ -70,9 +70,9 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_invoice_item_with_matching_credit_card_number
-    result = sales_engine.transaction_repository.find_all_by_credit_card_number("4680790942233742")
+    result = sales_engine.transaction_repository.find_all_by_credit_card_number("12345678")
     assert_equal 1, result.count
-    assert_equal "4680790942233742", result[0].credit_card_number
+    assert_equal "12345678", result[0].credit_card_number
   end
 
   def test_returns_all_invoice_item_with_matching_credit_card_expiration_date

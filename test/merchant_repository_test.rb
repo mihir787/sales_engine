@@ -21,7 +21,7 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal "pretzel", merchant_repo.find_item_by_id(9)
     parent.verify
   end
-  
+
   def test_it_can_call_up_to_sales_engine_with_id_to_find_invoice
     parent = Minitest::Mock.new
     merchant_repo = MerchantRepository.new(parent)
@@ -76,7 +76,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_returns_merchant_id
-    result = sales_engine.merchant_repository.find_by_id(100)
+    result = sales_engine.merchant_repository.find_by_id(2)
     assert_equal "Wisozk, Hoeger and Bosco", result.name
   end
 

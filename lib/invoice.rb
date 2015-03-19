@@ -42,7 +42,7 @@ class Invoice
     transactions.select{ |transaction| transaction.successful_transaction? }
   end
 
-  def add_items(items)
+  # def add_items(items)
     #NOTE  there woulcd be repeats
 
 
@@ -53,6 +53,6 @@ class Invoice
       # set the quantity to the number of items in the value
       # set the invoice_id to my id
       # add the invoice_item to invoice_item repo
-  end
+  # end
 
 end
