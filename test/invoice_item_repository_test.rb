@@ -49,8 +49,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_invoice_item_with_matching_item_id
-    result = sales_engine.invoice_item_repository.find_by_item_id(539)
-    assert_equal 539, result.item_id
+    result = sales_engine.invoice_item_repository.find_by_item_id(2)
+    assert_equal 2, result.item_id
   end
 
   def test_returns_invoice_item_with_matching_quantity
@@ -79,8 +79,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_returns_all_invoice_item_with_matching_item_id
-    result = sales_engine.invoice_item_repository.find_all_by_item_id(539)
-    assert_equal 539, result.first.item_id
+    result = sales_engine.invoice_item_repository.find_all_by_item_id(2)
+    assert_equal 2, result.first.item_id
   end
 
   def test_returns_all_invoice_item_with_matching_invoice_id

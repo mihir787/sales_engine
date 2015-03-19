@@ -91,24 +91,24 @@ class InvoiceRepository
     @invoices.find_all{|invoice| invoice.updated_at == date}
   end
 
-  def next_id
-    @invoices.last_id +1
-  end
-
-  def create(input)
-    #create the invoice
-    data = {
-            :id => next_id,
-            :customer_id => inputs[:customer].id,
-            :merchant_id => inputs[:merchant].id,
-            :status => inputs[:status],
-            :created_at => Time.now,
-            :updated_at => Time.now
-            }
-    invoice = Invoice.new(data, self)
-    @invoices << invoices
-
-    invoices.add_items(inputs[:items])
+  # def next_id
+  #   @invoices.last_id +1
+  # end
+  #
+  # def create(input)
+  #   #create the invoice
+  #   data = {
+  #           :id => next_id,
+  #           :customer_id => inputs[:customer].id,
+  #           :merchant_id => inputs[:merchant].id,
+  #           :status => inputs[:status],
+  #           :created_at => Time.now,
+  #           :updated_at => Time.now
+  #           }
+  #   invoice = Invoice.new(data, self)
+  #   @invoices << invoices
+  #
+  #   invoices.add_items(inputs[:items])
 
     #then add the items
   end

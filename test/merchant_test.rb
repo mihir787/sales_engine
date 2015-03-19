@@ -17,18 +17,18 @@ class MerchantTest < Minitest::Test
   end
 
   def test_it_can_return_favorite_customer
-    sales_engine = SalesEngine.new("./data")
+    sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
     merchant = sales_engine.merchant_repository.merchants[1]
-    assert_equal "Efren", merchant.favorite_customer.first_name
+    assert_equal "Joey", merchant.favorite_customer.first_name
   end
 
   def test_it_can_return_total_revenue
-    sales_engine = SalesEngine.new("./data")
+    sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
     merchant = sales_engine.merchant_repository.merchants[1]
-    assert_equal 436253, merchant.revenue.to_i
-    assert_equal 14079, merchant.revenue(Date.parse("2012-03-27 14:53:59 UTC")).to_i
+    assert_equal 136, merchant.revenue.to_i
+    assert_equal 0, merchant.revenue(Date.parse("2012-03-27 14:53:59 UTC")).to_i
   end
 
   def test_it_can_call_up_to_repository_with_id_to_find_item

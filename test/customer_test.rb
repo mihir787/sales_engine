@@ -45,22 +45,22 @@ class CustomerTest < MiniTest::Test
   end
 
   def test_it_can_get_transactions_through_invoices
-    sales_engine = SalesEngine.new("./data")
+    sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
     customer = sales_engine.customer_repository.customers[3]
-    customer1 = sales_engine.customer_repository.customers[500]
+    customer1 = sales_engine.customer_repository.customers[1]
 
-    assert_equal 7, customer.transactions.count
-    assert_equal 1, customer1.transactions.count
+    assert_equal 0, customer.transactions.count
+    assert_equal 2, customer1.transactions.count
   end
 
 
   def test_favorite_merchant
-    sales_engine = SalesEngine.new("./data")
+    sales_engine = SalesEngine.new("./fixtures")
     sales_engine.startup
     customer = sales_engine.customer_repository.find_by_id(2)
     # puts customer.transactions
-    assert_equal "Shields, Hirthe and Smith", customer.favorite_merchant.name
+    assert_equal "Wisozk, Hoeger and Bosco", customer.favorite_merchant.name
   end
 
 

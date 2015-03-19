@@ -39,7 +39,9 @@ class Merchant
   end
 
   def quantity_items_sold
-    successful_invoice_items.reduce(0) {|sum, invoice_item| sum + invoice_item.quantity}
+    successful_invoice_items.reduce(0) do |sum, invoice_item|
+       sum + invoice_item.quantity
+     end
   end
 
 

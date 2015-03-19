@@ -23,7 +23,7 @@ class FileLoaderTest < Minitest::Test
 
   def test_it_loads
     assert_equal "Alexander", @customer_data.to_a[1][:first_name]
-    assert_equal "95", @merchant_data.to_a[1][:id]
+    assert_equal "1", @merchant_data.to_a[1][:id]
     assert_equal "5592", @transaction_data.to_a[2][:id]
     assert_equal "2479", @item_data.to_a[2][:id]
     assert_equal "4838", @invoice_data.to_a[1][:id]

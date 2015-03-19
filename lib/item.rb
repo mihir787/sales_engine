@@ -25,7 +25,7 @@ class Item
   def invoice_items
     @parent.find_invoice_items(id)
   end
-  
+
   def successful_invoice_items
     invoice_items.select{|invoice_item| invoice_item.successful?}
   end
@@ -35,12 +35,16 @@ class Item
   end
 
   def best_day
-    invoice_item_sales = invoice_items.max_by{ |invoice_item| invoice_item.quantity }
+    invoice_item_sales = invoice_items.max_by do |invoice_item|
+       invoice_item.quantity
+     end
     invoice_item_sales.invoice.created_at
   end
 
   def revenue
-    successful_invoice_items.reduce(0){|total,invoice_item| total + invoice_item.revenue}
+    successful_invoice_items.reduce(0) do |total,invoice_item|
+      total + invoice_item.revenue
+    end
   end
 
   def number_sold
