@@ -92,8 +92,17 @@ class InvoiceRepository
   end
 
   def next_id
-    @invoices.last_id +1
+    @invoices.last.id + 1
   end
+
+  def add_invoice_item(item, quantity)
+    @sales_engine.make_inovice_item
+  end
+
+  def pass_to_invoice_repo(input, id)
+    sales_engine.create_transaction(input, id)
+  end
+
 
   def create(input)
     data = {
@@ -101,12 +110,16 @@ class InvoiceRepository
             :customer_id => input[:customer].id,
             :merchant_id => input[:merchant].id,
             :status => input[:status],
-            :created_at => Time.now,
-            :updated_at => Time.now
-            }
+            :created_at => "#{Time.now}",
+            :updated_at => "#{Time.now}"
+    }
 
     invoice = Invoice.new(data, self)
     @invoices << invoice
-    invoice.add_items(inputs[:items])
+
+    invoice.add_items(input[:items]).each do |item|
+      sales_engine.invoice_item_repository.create_invoice_item(data[:id], item[0], item[1])
+    end
+    invoice
   end
 end

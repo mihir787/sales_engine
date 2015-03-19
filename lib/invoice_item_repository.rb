@@ -90,6 +90,27 @@ class InvoiceItemRepository
     @invoice_items.find_all{|invoice_item| invoice_item.updated_at == date}
   end
 
+  def next_id
+    @invoice_items.last.id + 1
+  end
+
+  def create_invoice_item(invoice_id, item, quantity)
+    data = {
+          id: next_id,
+          item_id: item.id,
+          invoice_id: invoice_id,
+          quantity: quantity,
+          unit_price: item.unit_price,
+          created_at: "#{Time.now}",
+          updated_at: "#{Time.now}"
+    }
+
+    invoice_item = InvoiceItem.new(data, self)
+    @invoice_items << invoice_item
+  end
+
+
+
 
 
 end

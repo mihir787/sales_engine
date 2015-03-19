@@ -43,6 +43,18 @@ class Invoice
   end
 
   def add_items(items)
+    items_collection = []
+    items.group_by { |item| item }.each do |item, item_collection|
+      items_collection << [item, item_collection.count]
+    end
+    items_collection
+  end
+
+  def charge(input)
+    @parent.pass_to_invoice_repo(input, id)
+
+  end
+
     #NOTE  there woulcd be repeats
 
 
@@ -53,6 +65,5 @@ class Invoice
       # set the quantity to the number of items in the value
       # set the invoice_id to my id
       # add the invoice_item to invoice_item repo
-  end
 
 end

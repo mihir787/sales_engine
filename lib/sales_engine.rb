@@ -106,7 +106,13 @@ class SalesEngine
       end
     end
   end
+
+  def create_transaction(input, id)
+    @transaction_repository.create_transaction(input, id)
+  end
+
 end
+
 
 if __FILE__ == $0
 

@@ -100,4 +100,24 @@ class TransactionRepository
     end
   end
 
+  def next_id
+    @transactions.last.id + 1
+  end
+
+
+  def create_transaction(input, id)
+    transaction_data = {
+      id: next_id,
+      invoice_id: id,
+      credit_card_number: input[:credit_card_number],
+      credit_card_expiration_date: input[:credit_card_expiration_date],
+      result: input[:result],
+      created_at: "#{Time.now}",
+      updated_at: "#{Time.now}"
+    }
+
+    created_transaction = Transaction.new(transaction_data, self)
+    transactions << created_transaction
+  end
+
 end
