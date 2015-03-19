@@ -1,6 +1,9 @@
 require_relative 'test_helper'
 require_relative '../lib/invoice_repository'
 require_relative '../lib/sales_engine'
+require_relative '../lib/merchant'
+require_relative '../lib/customer'
+require_relative '../lib/sales_engine'
 
 class InvoiceRepositoryTest < Minitest::Test
   attr_reader :sales_engine
@@ -110,6 +113,32 @@ class InvoiceRepositoryTest < Minitest::Test
     result = sales_engine.invoice_repository.find_all_by_updated_at(Date.parse("2012-03-25 09:54:09 UTC"))
     assert_equal 1, result.count
   end
+
+  def test_create_invoice
+    sales_engine = SalesEngine.new("./fixtures")
+    sales_engine.startup
+    customer_data = { id: "100000", first_name: "bill", last_name: "peters",
+      created_at: "#{Time.now}", updated_at: "#{Time.now}" }
+    merchant_data = {id: "1000000", name: "Hogwarts",created_at: "#{Time.now}",
+      updated_at: "#{Time.now}" }
+    item_data = { id: "4000000", name: "fish", description: "cool",
+      unit_price: "76400", merchant_id: "1000000", created_at: "#{Time.now}",
+      updated_at: "#{Time.now}" }
+    item = Item.new(item_data, sales_engine.item_repository)
+    customer = Customer.new(customer_data, sales_engine.customer_repository)
+    merchant = Merchant.new(merchant_data, sales_engine.merchant_repository)
+    input = {customer: customer, merchant: merchant, status: "shipped",
+      items: [item, item, item] }
+
+
+    result = sales_engine.invoice_repository.create(input)
+
+    assert_equal 3, result.id
+    assert_equal 100000, result.customer_id
+    assert_equal 1000000, result.merchant_id
+    assert_equal "shipped", result.status
+  end
+
 
 
 end

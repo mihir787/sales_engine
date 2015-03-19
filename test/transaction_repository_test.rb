@@ -97,4 +97,12 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal "rex", transaction_repository.find_invoice(1)
   end
 
+  def test_create_transaction
+    input = { credit_card_number: "123", credit_card_expiration_data: "#{Time.now}",
+      result: "success"}
+    result = sales_engine.transaction_repository.create_transaction(input, "9999999")
+
+    assert_equal "123", result.pop.credit_card_number
+  end
+
 end

@@ -103,7 +103,6 @@ class InvoiceRepository
     sales_engine.create_transaction(input, id)
   end
 
-
   def create(input)
     data = {
             :id => next_id,
